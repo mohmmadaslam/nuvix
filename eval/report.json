@@ -1,0 +1,2522 @@
+{
+  "lexical_only": {
+    "summary": {
+      "config": "lexical_only",
+      "n_queries": 44,
+      "recall@1": 0.32954545454545453,
+      "recall@5": 0.36363636363636365,
+      "recall@10": 0.36363636363636365,
+      "mrr": 0.36363636363636365,
+      "ndcg@10": 0.36363636363636365
+    },
+    "by_category": {
+      "exact_phrase": {
+        "n": 5,
+        "recall@1": 0.7,
+        "recall@5": 0.8,
+        "recall@10": 0.8,
+        "mrr": 0.8
+      },
+      "exact_keyword": {
+        "n": 4,
+        "recall@1": 0.75,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "asr_damaged_proper_noun": {
+        "n": 3,
+        "recall@1": 0.3333333333333333,
+        "recall@5": 0.3333333333333333,
+        "recall@10": 0.3333333333333333,
+        "mrr": 0.3333333333333333
+      },
+      "paraphrase": {
+        "n": 9,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      },
+      "topic": {
+        "n": 13,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      },
+      "negative": {
+        "n": 7,
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "cross_lingual_semantic": {
+        "n": 3,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "per_query": [
+      {
+        "id": "q01",
+        "category": "exact_phrase",
+        "query": "Mars colony",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q02",
+        "category": "exact_keyword",
+        "query": "Stanford",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q03",
+        "category": "asr_damaged_proper_noun",
+        "query": "Stanfrd",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q04",
+        "category": "asr_damaged_proper_noun",
+        "query": "ultracapasitors",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q05",
+        "category": "paraphrase",
+        "query": "why civilizations forget how to build great things",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q06",
+        "category": "paraphrase",
+        "query": "combining human minds with AI",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q07",
+        "category": "paraphrase",
+        "query": "how do you handle fear when making big decisions",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q08",
+        "category": "topic",
+        "query": "splitting time between SpaceX and Tesla",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q09",
+        "category": "topic",
+        "query": "average production line speed",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q10",
+        "category": "topic",
+        "query": "OpenAI's sense of urgency and mission",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q11",
+        "category": "negative",
+        "query": "chocolate cake recipe",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q12",
+        "category": "negative",
+        "query": "weather forecast for tomorrow",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q13",
+        "category": "topic",
+        "query": "illuminati conspiracy theory",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q14",
+        "category": "exact_phrase",
+        "query": "Do you believe in Illuminati",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q15",
+        "category": "topic",
+        "query": "puppet master controlling politics behind the scenes",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q16",
+        "category": "topic",
+        "query": "ancient Egypt secret society history",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q17",
+        "category": "asr_damaged_proper_noun",
+        "query": "Deep Estate",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q18",
+        "category": "cross_lingual_semantic",
+        "query": "Deep State conspiracy",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q19",
+        "category": "cross_lingual_semantic",
+        "query": "who are the Illuminati",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q20",
+        "category": "paraphrase",
+        "query": "a secretive group controlling the world's money",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q21",
+        "category": "paraphrase",
+        "query": "why power always stays with a small group of people",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q22",
+        "category": "topic",
+        "query": "SpaceX Mars rocket",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q23",
+        "category": "negative",
+        "query": "bitcoin price prediction",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q24",
+        "category": "topic",
+        "query": "Bangladesh unrest caused by America",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q25",
+        "category": "exact_phrase",
+        "query": "One Biggest Habit or Metric",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q26",
+        "category": "exact_keyword",
+        "query": "Perseverance",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q27",
+        "category": "exact_keyword",
+        "query": "UPSC",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q28",
+        "category": "cross_lingual_semantic",
+        "query": "batsman",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q29",
+        "category": "paraphrase",
+        "query": "achieving a flow state where you play like yourself without pressure",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q30",
+        "category": "topic",
+        "query": "does waking up early matter for success",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q31",
+        "category": "topic",
+        "query": "luck versus skill in film industry compared to civil services exam",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q32",
+        "category": "paraphrase",
+        "query": "being born into privilege gives more opportunities to succeed",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q33",
+        "category": "topic",
+        "query": "why top players don't always become the very best despite similar effort",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q34",
+        "category": "negative",
+        "query": "football world cup final",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q35",
+        "category": "negative",
+        "query": "how to bake sourdough bread",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q36",
+        "category": "exact_phrase",
+        "query": "\u092d\u093e\u0917\u0928\u0947 \u0938\u0947 \u092a\u094d\u0930\u0947\u0936\u0930 \u0915\u092e \u0928\u0939\u0940\u0902 \u0939\u094b\u0924\u093e",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q37",
+        "category": "exact_keyword",
+        "query": "\u0911\u0915\u094d\u0938\u0940\u091c\u0928 \u092e\u093e\u0938\u094d\u0915",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q38",
+        "category": "topic",
+        "query": "why is self-care important before helping others",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q39",
+        "category": "topic",
+        "query": "how to handle ego and pride",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q40",
+        "category": "paraphrase",
+        "query": "true purpose in life is not just earning money",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q41",
+        "category": "paraphrase",
+        "query": "everyone's spiritual journey is already within them",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q42",
+        "category": "exact_phrase",
+        "query": "\u0917\u0941\u0930\u0941 \u0917\u094c\u0930 \u0917\u094b\u092a\u093e\u0932 \u0926\u093e\u0938 \u091c\u0940 \u0915\u093e \u0938\u094d\u0935\u093e\u0917\u0924",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q43",
+        "category": "negative",
+        "query": "knitting patterns for beginners",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q44",
+        "category": "negative",
+        "query": "\u0906\u091c \u0915\u093e \u092e\u094c\u0938\u092e \u0915\u0948\u0938\u093e \u0939\u0948",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      }
+    ]
+  },
+  "fuzzy_only": {
+    "summary": {
+      "config": "fuzzy_only",
+      "n_queries": 44,
+      "recall@1": 0.36363636363636365,
+      "recall@5": 0.4090909090909091,
+      "recall@10": 0.4090909090909091,
+      "mrr": 0.4090909090909091,
+      "ndcg@10": 0.40029879983557864
+    },
+    "by_category": {
+      "exact_phrase": {
+        "n": 5,
+        "recall@1": 0.7,
+        "recall@5": 0.8,
+        "recall@10": 0.8,
+        "mrr": 0.8
+      },
+      "exact_keyword": {
+        "n": 4,
+        "recall@1": 0.75,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "asr_damaged_proper_noun": {
+        "n": 3,
+        "recall@1": 0.5,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "mrr": 0.6666666666666666
+      },
+      "paraphrase": {
+        "n": 9,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      },
+      "topic": {
+        "n": 13,
+        "recall@1": 0.07692307692307693,
+        "recall@5": 0.07692307692307693,
+        "recall@10": 0.07692307692307693,
+        "mrr": 0.07692307692307693
+      },
+      "negative": {
+        "n": 7,
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "cross_lingual_semantic": {
+        "n": 3,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "per_query": [
+      {
+        "id": "q01",
+        "category": "exact_phrase",
+        "query": "Mars colony",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q02",
+        "category": "exact_keyword",
+        "query": "Stanford",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q03",
+        "category": "asr_damaged_proper_noun",
+        "query": "Stanfrd",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q04",
+        "category": "asr_damaged_proper_noun",
+        "query": "ultracapasitors",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q05",
+        "category": "paraphrase",
+        "query": "why civilizations forget how to build great things",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q06",
+        "category": "paraphrase",
+        "query": "combining human minds with AI",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q07",
+        "category": "paraphrase",
+        "query": "how do you handle fear when making big decisions",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q08",
+        "category": "topic",
+        "query": "splitting time between SpaceX and Tesla",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.6131471927654584
+      },
+      {
+        "id": "q09",
+        "category": "topic",
+        "query": "average production line speed",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q10",
+        "category": "topic",
+        "query": "OpenAI's sense of urgency and mission",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q11",
+        "category": "negative",
+        "query": "chocolate cake recipe",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q12",
+        "category": "negative",
+        "query": "weather forecast for tomorrow",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q13",
+        "category": "topic",
+        "query": "illuminati conspiracy theory",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q14",
+        "category": "exact_phrase",
+        "query": "Do you believe in Illuminati",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q15",
+        "category": "topic",
+        "query": "puppet master controlling politics behind the scenes",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q16",
+        "category": "topic",
+        "query": "ancient Egypt secret society history",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q17",
+        "category": "asr_damaged_proper_noun",
+        "query": "Deep Estate",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q18",
+        "category": "cross_lingual_semantic",
+        "query": "Deep State conspiracy",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q19",
+        "category": "cross_lingual_semantic",
+        "query": "who are the Illuminati",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q20",
+        "category": "paraphrase",
+        "query": "a secretive group controlling the world's money",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q21",
+        "category": "paraphrase",
+        "query": "why power always stays with a small group of people",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q22",
+        "category": "topic",
+        "query": "SpaceX Mars rocket",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q23",
+        "category": "negative",
+        "query": "bitcoin price prediction",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q24",
+        "category": "topic",
+        "query": "Bangladesh unrest caused by America",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q25",
+        "category": "exact_phrase",
+        "query": "One Biggest Habit or Metric",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q26",
+        "category": "exact_keyword",
+        "query": "Perseverance",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q27",
+        "category": "exact_keyword",
+        "query": "UPSC",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q28",
+        "category": "cross_lingual_semantic",
+        "query": "batsman",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q29",
+        "category": "paraphrase",
+        "query": "achieving a flow state where you play like yourself without pressure",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q30",
+        "category": "topic",
+        "query": "does waking up early matter for success",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q31",
+        "category": "topic",
+        "query": "luck versus skill in film industry compared to civil services exam",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q32",
+        "category": "paraphrase",
+        "query": "being born into privilege gives more opportunities to succeed",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q33",
+        "category": "topic",
+        "query": "why top players don't always become the very best despite similar effort",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q34",
+        "category": "negative",
+        "query": "football world cup final",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q35",
+        "category": "negative",
+        "query": "how to bake sourdough bread",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q36",
+        "category": "exact_phrase",
+        "query": "\u092d\u093e\u0917\u0928\u0947 \u0938\u0947 \u092a\u094d\u0930\u0947\u0936\u0930 \u0915\u092e \u0928\u0939\u0940\u0902 \u0939\u094b\u0924\u093e",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q37",
+        "category": "exact_keyword",
+        "query": "\u0911\u0915\u094d\u0938\u0940\u091c\u0928 \u092e\u093e\u0938\u094d\u0915",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q38",
+        "category": "topic",
+        "query": "why is self-care important before helping others",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q39",
+        "category": "topic",
+        "query": "how to handle ego and pride",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q40",
+        "category": "paraphrase",
+        "query": "true purpose in life is not just earning money",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q41",
+        "category": "paraphrase",
+        "query": "everyone's spiritual journey is already within them",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q42",
+        "category": "exact_phrase",
+        "query": "\u0917\u0941\u0930\u0941 \u0917\u094c\u0930 \u0917\u094b\u092a\u093e\u0932 \u0926\u093e\u0938 \u091c\u0940 \u0915\u093e \u0938\u094d\u0935\u093e\u0917\u0924",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q43",
+        "category": "negative",
+        "query": "knitting patterns for beginners",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q44",
+        "category": "negative",
+        "query": "\u0906\u091c \u0915\u093e \u092e\u094c\u0938\u092e \u0915\u0948\u0938\u093e \u0939\u0948",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      }
+    ]
+  },
+  "semantic_only": {
+    "summary": {
+      "config": "semantic_only",
+      "n_queries": 44,
+      "recall@1": 0.625,
+      "recall@5": 0.8030303030303031,
+      "recall@10": 0.8162878787878788,
+      "mrr": 0.7848484848484848,
+      "ndcg@10": 0.770292733033045
+    },
+    "by_category": {
+      "exact_phrase": {
+        "n": 5,
+        "recall@1": 0.9,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "exact_keyword": {
+        "n": 4,
+        "recall@1": 0.875,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "asr_damaged_proper_noun": {
+        "n": 3,
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "paraphrase": {
+        "n": 9,
+        "recall@1": 0.7777777777777778,
+        "recall@5": 0.9444444444444444,
+        "recall@10": 0.9444444444444444,
+        "mrr": 0.925925925925926
+      },
+      "topic": {
+        "n": 13,
+        "recall@1": 0.7051282051282051,
+        "recall@5": 0.9358974358974359,
+        "recall@10": 0.9807692307692307,
+        "mrr": 0.9615384615384616
+      },
+      "negative": {
+        "n": 7,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      },
+      "cross_lingual_semantic": {
+        "n": 3,
+        "recall@1": 0.1111111111111111,
+        "recall@5": 0.8888888888888888,
+        "recall@10": 0.8888888888888888,
+        "mrr": 0.5666666666666667
+      }
+    },
+    "per_query": [
+      {
+        "id": "q01",
+        "category": "exact_phrase",
+        "query": "Mars colony",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q02",
+        "category": "exact_keyword",
+        "query": "Stanford",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.8772153153380493
+      },
+      {
+        "id": "q03",
+        "category": "asr_damaged_proper_noun",
+        "query": "Stanfrd",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q04",
+        "category": "asr_damaged_proper_noun",
+        "query": "ultracapasitors",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q05",
+        "category": "paraphrase",
+        "query": "why civilizations forget how to build great things",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q06",
+        "category": "paraphrase",
+        "query": "combining human minds with AI",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q07",
+        "category": "paraphrase",
+        "query": "how do you handle fear when making big decisions",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q08",
+        "category": "topic",
+        "query": "splitting time between SpaceX and Tesla",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q09",
+        "category": "topic",
+        "query": "average production line speed",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.8772153153380493
+      },
+      {
+        "id": "q10",
+        "category": "topic",
+        "query": "OpenAI's sense of urgency and mission",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q11",
+        "category": "negative",
+        "query": "chocolate cake recipe",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q12",
+        "category": "negative",
+        "query": "weather forecast for tomorrow",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q13",
+        "category": "topic",
+        "query": "illuminati conspiracy theory",
+        "recall@1": 0.5,
+        "recall@5": 0.75,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9619991470595832
+      },
+      {
+        "id": "q14",
+        "category": "exact_phrase",
+        "query": "Do you believe in Illuminati",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q15",
+        "category": "topic",
+        "query": "puppet master controlling politics behind the scenes",
+        "recall@1": 0.0,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6546154994739983
+      },
+      {
+        "id": "q16",
+        "category": "topic",
+        "query": "ancient Egypt secret society history",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q17",
+        "category": "asr_damaged_proper_noun",
+        "query": "Deep Estate",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q18",
+        "category": "cross_lingual_semantic",
+        "query": "Deep State conspiracy",
+        "recall@1": 0.3333333333333333,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg@10": 0.7653606369886217
+      },
+      {
+        "id": "q19",
+        "category": "cross_lingual_semantic",
+        "query": "who are the Illuminati",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.4792350074047671
+      },
+      {
+        "id": "q20",
+        "category": "paraphrase",
+        "query": "a secretive group controlling the world's money",
+        "recall@1": 0.5,
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "mrr": 1.0,
+        "ndcg@10": 0.6131471927654584
+      },
+      {
+        "id": "q21",
+        "category": "paraphrase",
+        "query": "why power always stays with a small group of people",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q22",
+        "category": "topic",
+        "query": "SpaceX Mars rocket",
+        "recall@1": 0.5,
+        "recall@5": 0.75,
+        "recall@10": 0.75,
+        "mrr": 1.0,
+        "ndcg@10": 0.75369761125927
+      },
+      {
+        "id": "q23",
+        "category": "negative",
+        "query": "bitcoin price prediction",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q24",
+        "category": "topic",
+        "query": "Bangladesh unrest caused by America",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q25",
+        "category": "exact_phrase",
+        "query": "One Biggest Habit or Metric",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q26",
+        "category": "exact_keyword",
+        "query": "Perseverance",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9197207891481876
+      },
+      {
+        "id": "q27",
+        "category": "exact_keyword",
+        "query": "UPSC",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q28",
+        "category": "cross_lingual_semantic",
+        "query": "batsman",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6240505200038379
+      },
+      {
+        "id": "q29",
+        "category": "paraphrase",
+        "query": "achieving a flow state where you play like yourself without pressure",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q30",
+        "category": "topic",
+        "query": "does waking up early matter for success",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q31",
+        "category": "topic",
+        "query": "luck versus skill in film industry compared to civil services exam",
+        "recall@1": 0.6666666666666666,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9469024295259745
+      },
+      {
+        "id": "q32",
+        "category": "paraphrase",
+        "query": "being born into privilege gives more opportunities to succeed",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q33",
+        "category": "topic",
+        "query": "why top players don't always become the very best despite similar effort",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q34",
+        "category": "negative",
+        "query": "football world cup final",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q35",
+        "category": "negative",
+        "query": "how to bake sourdough bread",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q36",
+        "category": "exact_phrase",
+        "query": "\u092d\u093e\u0917\u0928\u0947 \u0938\u0947 \u092a\u094d\u0930\u0947\u0936\u0930 \u0915\u092e \u0928\u0939\u0940\u0902 \u0939\u094b\u0924\u093e",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q37",
+        "category": "exact_keyword",
+        "query": "\u0911\u0915\u094d\u0938\u0940\u091c\u0928 \u092e\u093e\u0938\u094d\u0915",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q38",
+        "category": "topic",
+        "query": "why is self-care important before helping others",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9197207891481876
+      },
+      {
+        "id": "q39",
+        "category": "topic",
+        "query": "how to handle ego and pride",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q40",
+        "category": "paraphrase",
+        "query": "true purpose in life is not just earning money",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q41",
+        "category": "paraphrase",
+        "query": "everyone's spiritual journey is already within them",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      {
+        "id": "q42",
+        "category": "exact_phrase",
+        "query": "\u0917\u0941\u0930\u0941 \u0917\u094c\u0930 \u0917\u094b\u092a\u093e\u0932 \u0926\u093e\u0938 \u091c\u0940 \u0915\u093e \u0938\u094d\u0935\u093e\u0917\u0924",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q43",
+        "category": "negative",
+        "query": "knitting patterns for beginners",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q44",
+        "category": "negative",
+        "query": "\u0906\u091c \u0915\u093e \u092e\u094c\u0938\u092e \u0915\u0948\u0938\u093e \u0939\u0948",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      }
+    ]
+  },
+  "hybrid": {
+    "summary": {
+      "config": "hybrid",
+      "n_queries": 44,
+      "recall@1": 0.5909090909090909,
+      "recall@5": 0.8030303030303031,
+      "recall@10": 0.8162878787878788,
+      "mrr": 0.7734848484848484,
+      "ndcg@10": 0.7665198614213455
+    },
+    "by_category": {
+      "exact_phrase": {
+        "n": 5,
+        "recall@1": 0.7,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.9
+      },
+      "exact_keyword": {
+        "n": 4,
+        "recall@1": 0.75,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "asr_damaged_proper_noun": {
+        "n": 3,
+        "recall@1": 0.8333333333333334,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "paraphrase": {
+        "n": 9,
+        "recall@1": 0.7777777777777778,
+        "recall@5": 0.9444444444444444,
+        "recall@10": 0.9444444444444444,
+        "mrr": 0.925925925925926
+      },
+      "topic": {
+        "n": 13,
+        "recall@1": 0.7435897435897435,
+        "recall@5": 0.9358974358974359,
+        "recall@10": 0.9807692307692307,
+        "mrr": 0.9615384615384616
+      },
+      "negative": {
+        "n": 7,
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0
+      },
+      "cross_lingual_semantic": {
+        "n": 3,
+        "recall@1": 0.1111111111111111,
+        "recall@5": 0.8888888888888888,
+        "recall@10": 0.8888888888888888,
+        "mrr": 0.5666666666666667
+      }
+    },
+    "per_query": [
+      {
+        "id": "q01",
+        "category": "exact_phrase",
+        "query": "Mars colony",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q02",
+        "category": "exact_keyword",
+        "query": "Stanford",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q03",
+        "category": "asr_damaged_proper_noun",
+        "query": "Stanfrd",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q04",
+        "category": "asr_damaged_proper_noun",
+        "query": "ultracapasitors",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q05",
+        "category": "paraphrase",
+        "query": "why civilizations forget how to build great things",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q06",
+        "category": "paraphrase",
+        "query": "combining human minds with AI",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q07",
+        "category": "paraphrase",
+        "query": "how do you handle fear when making big decisions",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q08",
+        "category": "topic",
+        "query": "splitting time between SpaceX and Tesla",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q09",
+        "category": "topic",
+        "query": "average production line speed",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.8772153153380493
+      },
+      {
+        "id": "q10",
+        "category": "topic",
+        "query": "OpenAI's sense of urgency and mission",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q11",
+        "category": "negative",
+        "query": "chocolate cake recipe",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q12",
+        "category": "negative",
+        "query": "weather forecast for tomorrow",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q13",
+        "category": "topic",
+        "query": "illuminati conspiracy theory",
+        "recall@1": 0.5,
+        "recall@5": 0.75,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9619991470595832
+      },
+      {
+        "id": "q14",
+        "category": "exact_phrase",
+        "query": "Do you believe in Illuminati",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q15",
+        "category": "topic",
+        "query": "puppet master controlling politics behind the scenes",
+        "recall@1": 0.0,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6546154994739983
+      },
+      {
+        "id": "q16",
+        "category": "topic",
+        "query": "ancient Egypt secret society history",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q17",
+        "category": "asr_damaged_proper_noun",
+        "query": "Deep Estate",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q18",
+        "category": "cross_lingual_semantic",
+        "query": "Deep State conspiracy",
+        "recall@1": 0.3333333333333333,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg@10": 0.7653606369886217
+      },
+      {
+        "id": "q19",
+        "category": "cross_lingual_semantic",
+        "query": "who are the Illuminati",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.4792350074047671
+      },
+      {
+        "id": "q20",
+        "category": "paraphrase",
+        "query": "a secretive group controlling the world's money",
+        "recall@1": 0.5,
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "mrr": 1.0,
+        "ndcg@10": 0.6131471927654584
+      },
+      {
+        "id": "q21",
+        "category": "paraphrase",
+        "query": "why power always stays with a small group of people",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q22",
+        "category": "topic",
+        "query": "SpaceX Mars rocket",
+        "recall@1": 0.5,
+        "recall@5": 0.75,
+        "recall@10": 0.75,
+        "mrr": 1.0,
+        "ndcg@10": 0.75369761125927
+      },
+      {
+        "id": "q23",
+        "category": "negative",
+        "query": "bitcoin price prediction",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q24",
+        "category": "topic",
+        "query": "Bangladesh unrest caused by America",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q25",
+        "category": "exact_phrase",
+        "query": "One Biggest Habit or Metric",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q26",
+        "category": "exact_keyword",
+        "query": "Perseverance",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q27",
+        "category": "exact_keyword",
+        "query": "UPSC",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q28",
+        "category": "cross_lingual_semantic",
+        "query": "batsman",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6240505200038379
+      },
+      {
+        "id": "q29",
+        "category": "paraphrase",
+        "query": "achieving a flow state where you play like yourself without pressure",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q30",
+        "category": "topic",
+        "query": "does waking up early matter for success",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q31",
+        "category": "topic",
+        "query": "luck versus skill in film industry compared to civil services exam",
+        "recall@1": 0.6666666666666666,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9469024295259745
+      },
+      {
+        "id": "q32",
+        "category": "paraphrase",
+        "query": "being born into privilege gives more opportunities to succeed",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q33",
+        "category": "topic",
+        "query": "why top players don't always become the very best despite similar effort",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q34",
+        "category": "negative",
+        "query": "football world cup final",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q35",
+        "category": "negative",
+        "query": "how to bake sourdough bread",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q36",
+        "category": "exact_phrase",
+        "query": "\u092d\u093e\u0917\u0928\u0947 \u0938\u0947 \u092a\u094d\u0930\u0947\u0936\u0930 \u0915\u092e \u0928\u0939\u0940\u0902 \u0939\u094b\u0924\u093e",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q37",
+        "category": "exact_keyword",
+        "query": "\u0911\u0915\u094d\u0938\u0940\u091c\u0928 \u092e\u093e\u0938\u094d\u0915",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q38",
+        "category": "topic",
+        "query": "why is self-care important before helping others",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.9197207891481876
+      },
+      {
+        "id": "q39",
+        "category": "topic",
+        "query": "how to handle ego and pride",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q40",
+        "category": "paraphrase",
+        "query": "true purpose in life is not just earning money",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q41",
+        "category": "paraphrase",
+        "query": "everyone's spiritual journey is already within them",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      {
+        "id": "q42",
+        "category": "exact_phrase",
+        "query": "\u0917\u0941\u0930\u0941 \u0917\u094c\u0930 \u0917\u094b\u092a\u093e\u0932 \u0926\u093e\u0938 \u091c\u0940 \u0915\u093e \u0938\u094d\u0935\u093e\u0917\u0924",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      {
+        "id": "q43",
+        "category": "negative",
+        "query": "knitting patterns for beginners",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q44",
+        "category": "negative",
+        "query": "\u0906\u091c \u0915\u093e \u092e\u094c\u0938\u092e \u0915\u0948\u0938\u093e \u0939\u0948",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      }
+    ]
+  },
+  "hybrid_rerank": {
+    "summary": {
+      "config": "hybrid_rerank",
+      "n_queries": 44,
+      "recall@1": 0.7840909090909091,
+      "recall@5": 0.9128787878787878,
+      "recall@10": 0.9128787878787878,
+      "mrr": 0.9090909090909091,
+      "ndcg@10": 0.8857110687180579
+    },
+    "by_category": {
+      "exact_phrase": {
+        "n": 5,
+        "recall@1": 0.9,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "exact_keyword": {
+        "n": 4,
+        "recall@1": 0.75,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "asr_damaged_proper_noun": {
+        "n": 3,
+        "recall@1": 0.8333333333333334,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "paraphrase": {
+        "n": 9,
+        "recall@1": 0.8333333333333334,
+        "recall@5": 0.9444444444444444,
+        "recall@10": 0.9444444444444444,
+        "mrr": 0.9444444444444444
+      },
+      "topic": {
+        "n": 13,
+        "recall@1": 0.7435897435897435,
+        "recall@5": 0.8205128205128205,
+        "recall@10": 0.8205128205128205,
+        "mrr": 0.8461538461538461
+      },
+      "negative": {
+        "n": 7,
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0
+      },
+      "cross_lingual_semantic": {
+        "n": 3,
+        "recall@1": 0.1111111111111111,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "mrr": 0.5
+      }
+    },
+    "per_query": [
+      {
+        "id": "q01",
+        "category": "exact_phrase",
+        "query": "Mars colony",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q02",
+        "category": "exact_keyword",
+        "query": "Stanford",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q03",
+        "category": "asr_damaged_proper_noun",
+        "query": "Stanfrd",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q04",
+        "category": "asr_damaged_proper_noun",
+        "query": "ultracapasitors",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q05",
+        "category": "paraphrase",
+        "query": "why civilizations forget how to build great things",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q06",
+        "category": "paraphrase",
+        "query": "combining human minds with AI",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q07",
+        "category": "paraphrase",
+        "query": "how do you handle fear when making big decisions",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q08",
+        "category": "topic",
+        "query": "splitting time between SpaceX and Tesla",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q09",
+        "category": "topic",
+        "query": "average production line speed",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q10",
+        "category": "topic",
+        "query": "OpenAI's sense of urgency and mission",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q11",
+        "category": "negative",
+        "query": "chocolate cake recipe",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q12",
+        "category": "negative",
+        "query": "weather forecast for tomorrow",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q13",
+        "category": "topic",
+        "query": "illuminati conspiracy theory",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q14",
+        "category": "exact_phrase",
+        "query": "Do you believe in Illuminati",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q15",
+        "category": "topic",
+        "query": "puppet master controlling politics behind the scenes",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q16",
+        "category": "topic",
+        "query": "ancient Egypt secret society history",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.6131471927654584
+      },
+      {
+        "id": "q17",
+        "category": "asr_damaged_proper_noun",
+        "query": "Deep Estate",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q18",
+        "category": "cross_lingual_semantic",
+        "query": "Deep State conspiracy",
+        "recall@1": 0.3333333333333333,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q19",
+        "category": "cross_lingual_semantic",
+        "query": "who are the Illuminati",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6447841584694202
+      },
+      {
+        "id": "q20",
+        "category": "paraphrase",
+        "query": "a secretive group controlling the world's money",
+        "recall@1": 0.5,
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "mrr": 1.0,
+        "ndcg@10": 0.6131471927654584
+      },
+      {
+        "id": "q21",
+        "category": "paraphrase",
+        "query": "why power always stays with a small group of people",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q22",
+        "category": "topic",
+        "query": "SpaceX Mars rocket",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q23",
+        "category": "negative",
+        "query": "bitcoin price prediction",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q24",
+        "category": "topic",
+        "query": "Bangladesh unrest caused by America",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q25",
+        "category": "exact_phrase",
+        "query": "One Biggest Habit or Metric",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q26",
+        "category": "exact_keyword",
+        "query": "Perseverance",
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q27",
+        "category": "exact_keyword",
+        "query": "UPSC",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q28",
+        "category": "cross_lingual_semantic",
+        "query": "batsman",
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      {
+        "id": "q29",
+        "category": "paraphrase",
+        "query": "achieving a flow state where you play like yourself without pressure",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q30",
+        "category": "topic",
+        "query": "does waking up early matter for success",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q31",
+        "category": "topic",
+        "query": "luck versus skill in film industry compared to civil services exam",
+        "recall@1": 0.6666666666666666,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg@10": 0.46927872602275644
+      },
+      {
+        "id": "q32",
+        "category": "paraphrase",
+        "query": "being born into privilege gives more opportunities to succeed",
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      {
+        "id": "q33",
+        "category": "topic",
+        "query": "why top players don't always become the very best despite similar effort",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q34",
+        "category": "negative",
+        "query": "football world cup final",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q35",
+        "category": "negative",
+        "query": "how to bake sourdough bread",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q36",
+        "category": "exact_phrase",
+        "query": "\u092d\u093e\u0917\u0928\u0947 \u0938\u0947 \u092a\u094d\u0930\u0947\u0936\u0930 \u0915\u092e \u0928\u0939\u0940\u0902 \u0939\u094b\u0924\u093e",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q37",
+        "category": "exact_keyword",
+        "query": "\u0911\u0915\u094d\u0938\u0940\u091c\u0928 \u092e\u093e\u0938\u094d\u0915",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q38",
+        "category": "topic",
+        "query": "why is self-care important before helping others",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q39",
+        "category": "topic",
+        "query": "how to handle ego and pride",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q40",
+        "category": "paraphrase",
+        "query": "true purpose in life is not just earning money",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q41",
+        "category": "paraphrase",
+        "query": "everyone's spiritual journey is already within them",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q42",
+        "category": "exact_phrase",
+        "query": "\u0917\u0941\u0930\u0941 \u0917\u094c\u0930 \u0917\u094b\u092a\u093e\u0932 \u0926\u093e\u0938 \u091c\u0940 \u0915\u093e \u0938\u094d\u0935\u093e\u0917\u0924",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q43",
+        "category": "negative",
+        "query": "knitting patterns for beginners",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q44",
+        "category": "negative",
+        "query": "\u0906\u091c \u0915\u093e \u092e\u094c\u0938\u092e \u0915\u0948\u0938\u093e \u0939\u0948",
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      }
+    ]
+  }
+}

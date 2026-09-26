@@ -240,6 +240,7 @@ def search(
                 "start_ms": start_ms,  # utterance's own bounds - used for gold-interval matching in eval/
                 "end_ms": end_ms,
                 "timestamp": f"{mm:02d}:{ss:02d}",
+                "jump_ms": jump_ms,  # word-level position of the match - where a player should seek to
                 "text": text,
                 "snippet": snippet,
             }

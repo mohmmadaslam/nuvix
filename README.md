@@ -212,11 +212,22 @@ Documented as they were found, not smoothed over:
   once complete — results should be read with that in mind, not over-interpreted as
   precise population statistics.
 
+## Demo UI
+
+`python -m api.server` serves a local web UI at http://127.0.0.1:8000 with three tabs:
+**Search** (toggle keyword / fuzzy / semantic / rerank individually to see what each method
+contributes; every result shows file, speaker, timestamp, the highlighted text, which
+methods found it and its scores; **Play** jumps the source audio to the matching word),
+**Evaluation** (the ablation table from `eval/report.json`, per-category results and the
+queries that failed) and **Corpus** (the 5 recordings). It calls the same `search.query.search`
+as the CLI and the eval, so what it shows is the measured system.
+
 ## Repo layout
 
 ```
 data/           manifest, videos, extracted audio, golden query labels
 db/             Postgres schema
+api/            local demo server + single-page search UI (stdlib only, no extra dependencies)
 ingest/         transcription -> diarization -> chunking -> embedding -> load pipeline
 search/         hybrid retrieval (lexical + fuzzy + semantic + RRF + rerank)
 eval/           recall@k / MRR / nDCG scorer, ablation runner
@@ -235,6 +246,7 @@ cp .env.example .env   # fill in HF_TOKEN (see .env.example for the gated-model 
 
 python -m ingest.run_pipeline <recording_id>     # per file, or --all
 python -m search.query "your query here" --k 5
-python -m eval.run_eval                          # ablation report against the gold set
+python -m eval.run_eval --out eval/report.json   # ablation report against the gold set
+python -m api.server                             # search UI at http://127.0.0.1:8000
 python -m pytest tests/                          # automated recall@k / MRR tests
 ```

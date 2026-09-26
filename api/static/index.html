@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NUVIX Audio Search</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --ink: #14181f; --muted: #5d6675; --line: #e2e5ea;
+    --accent: #2f5bea; --accent-ink: #ffffff; --mark: #ffe58a; --ok: #1f8a57; --warn: #b5701b;
+    --lex: #7a4bd6; --fuz: #c2570c; --sem: #0b7f9b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1218; --surface: #171b23; --ink: #e8ebf0; --muted: #9aa3b2; --line: #272d38;
+      --accent: #6f93ff; --accent-ink: #0b1020; --mark: #6b5a12; --ok: #4cc58a; --warn: #e0a24a;
+      --lex: #b18cf5; --fuz: #f29a5c; --sem: #4fc3dc;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 96px; }
+  header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: .5px; }
+  .tag { color: var(--muted); font-size: 14px; }
+  nav { display: flex; gap: 4px; margin: 16px 0; border-bottom: 1px solid var(--line); }
+  nav button { background: none; border: 0; color: var(--muted); padding: 8px 14px; cursor: pointer;
+    font: inherit; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  nav button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .searchbox { display: flex; gap: 8px; }
+  input[type=search] { flex: 1; min-width: 0; padding: 12px 14px; font: inherit; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  input[type=search]:focus, button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .go { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 10px;
+    padding: 0 20px; font: inherit; font-weight: 600; cursor: pointer; }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 12px 0 4px; color: var(--muted); font-size: 13px; align-items: center; }
+  .opts label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+  select { font: inherit; font-size: 13px; background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px; padding: 2px 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+  .chip { background: var(--surface); border: 1px solid var(--line); color: var(--ink); border-radius: 999px;
+    padding: 4px 11px; font: inherit; font-size: 13px; cursor: pointer; }
+  .chip:hover { border-color: var(--accent); }
+  .chiplabel { color: var(--muted); font-size: 13px; align-self: center; }
+  .status { margin: 18px 0 8px; color: var(--muted); font-size: 13px; min-height: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 10px; }
+  .card.playing { border-color: var(--accent); }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+  .meta .title { color: var(--ink); font-weight: 600; }
+  .pill { border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; font-size: 12px; }
+  .spk { color: var(--ink); }
+  .snippet { margin: 8px 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 2px; }
+  .foot { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 12px; color: var(--muted); }
+  .play { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 8px;
+    padding: 5px 12px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .m-lexical { color: var(--lex); border-color: var(--lex); }
+  .m-fuzzy { color: var(--fuz); border-color: var(--fuz); }
+  .m-semantic { color: var(--sem); border-color: var(--sem); }
+  .empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  th, td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  tr:last-child td { border-bottom: 0; }
+  tr.best td { font-weight: 700; color: var(--ok); }
+  h2 { font-size: 16px; margin: 24px 0 8px; }
+  .note { color: var(--muted); font-size: 13px; margin: 8px 0; }
+  .tablewrap { overflow-x: auto; }
+  #player { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface);
+    border-top: 1px solid var(--line); padding: 8px 16px; display: none; }
+  #player .inner { max-width: 860px; margin: 0 auto; display: flex; gap: 12px; align-items: center; font-size: 13px; }
+  #player audio { flex: 1; min-width: 0; height: 34px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>NUVIX</h1>
+    <span class="tag">Hybrid intelligence for audio: keyword, fuzzy and semantic search over 5 recordings</span>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" aria-selected="true" data-tab="search">Search</button>
+    <button role="tab" aria-selected="false" data-tab="eval">Evaluation</button>
+    <button role="tab" aria-selected="false" data-tab="corpus">Corpus</button>
+  </nav>
+
+  <section id="tab-search">
+    <form class="searchbox" id="form">
+      <input type="search" id="q" placeholder="Search what was said, or what it meant..." autocomplete="off" autofocus>
+      <button class="go" type="submit">Search</button>
+    </form>
+    <div class="opts">
+      <span>Methods:</span>
+      <label><input type="checkbox" class="leg" value="lexical" checked> Keyword</label>
+      <label><input type="checkbox" class="leg" value="fuzzy" checked> Fuzzy</label>
+      <label><input type="checkbox" class="leg" value="semantic" checked> Semantic</label>
+      <label><input type="checkbox" id="rerank" checked> Rerank</label>
+      <label>Results
+        <select id="k"><option>5</option><option selected>10</option><option>20</option></select>
+      </label>
+    </div>
+    <div class="chips" id="chips"><span class="chiplabel">Try:</span></div>
+    <div class="status" id="status"></div>
+    <div id="results"></div>
+  </section>
+
+  <section id="tab-eval" hidden></section>
+  <section id="tab-corpus" hidden></section>
+</div>
+
+<div id="player">
+  <div class="inner">
+    <span id="nowplaying"></span>
+    <audio id="audio" controls preload="none"></audio>
+  </div>
+</div>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = ms => { const s = Math.floor(ms / 1000); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+const highlight = t => esc(t).replace(/\*\*(.+?)\*\*/gs, '<mark>$1</mark>');
+
+const EXAMPLES = [
+  ['Mars colony', 'exact phrase'],
+  ['Stanfrd', 'misspelling, fuzzy match'],
+  ['why civilizations forget how to build great things', 'paraphrase, no shared words'],
+  ['Deep State conspiracy', 'English query, Hindi answer'],
+  ['भागने से प्रेशर कम नहीं होता', 'Hindi'],
+  ['chocolate cake recipe', 'no answer: returns nothing'],
+];
+for (const [q, why] of EXAMPLES) {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.type = 'button'; b.textContent = q; b.title = why;
+  b.onclick = () => { $('#q').value = q; run(); };
+  $('#chips').append(b);
+}
+
+// ---- tabs
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x === b));
+  for (const t of ['search', 'eval', 'corpus']) $('#tab-' + t).hidden = t !== b.dataset.tab;
+  if (b.dataset.tab === 'eval') loadEval();
+  if (b.dataset.tab === 'corpus') loadCorpus();
+});
+
+// ---- search
+let seq = 0;
+$('#form').onsubmit = e => { e.preventDefault(); run(); };
+document.querySelectorAll('.leg, #rerank, #k').forEach(el => el.onchange = () => $('#q').value.trim() && run());
+
+async function run() {
+  const q = $('#q').value.trim();
+  if (!q) return;
+  const legs = [...document.querySelectorAll('.leg:checked')].map(x => x.value);
+  if (!legs.length) { $('#status').textContent = 'Select at least one method.'; return; }
+  const me = ++seq;
+  $('#status').textContent = 'Searching...';
+  const p = new URLSearchParams({ q, k: $('#k').value, rerank: $('#rerank').checked ? 1 : 0, legs: legs.join(',') });
+  let data;
+  try {
+    const r = await fetch('/api/search?' + p);
+    data = await r.json();
+    if (!r.ok) throw new Error(data.error || r.status);
+  } catch (err) { if (me === seq) $('#status').textContent = 'Error: ' + err.message; return; }
+  if (me !== seq) return;
+  render(data);
+}
+
+function render(d) {
+  const n = d.results.length;
+  $('#status').textContent = `${n} result${n === 1 ? '' : 's'} in ${d.took_ms} ms`
+    + ` (${d.legs.join(' + ')}${d.rerank ? ' + rerank' : ''})`;
+  const box = $('#results'); box.innerHTML = '';
+  if (!n) {
+    box.innerHTML = '<div class="empty">No confident matches. With rerank on, results the cross-encoder scores as irrelevant are dropped rather than padded in, so a query with no answer in the corpus returns nothing.</div>';
+    return;
+  }
+  d.results.forEach((r, i) => {
+    const el = document.createElement('div'); el.className = 'card'; el.dataset.id = r.utterance_id;
+    const methods = r.hit_methods.map(m => `<span class="pill m-${esc(m)}">${esc(m)}</span>`).join('');
+    const rr = r.rerank_score != null ? `rerank ${r.rerank_score.toFixed(3)}` : '';
+    el.innerHTML = `
+      <div class="meta"><span>#${i + 1}</span><span class="title">${esc(r.title)}</span>
+        <span class="pill spk">${esc(r.speaker)}</span><span class="pill">${esc(r.timestamp)}</span></div>
+      <div class="snippet">${highlight(r.snippet)}</div>
+      <div class="foot"><button class="play" type="button">&#9654; Play from ${esc(r.timestamp)}</button>
+        ${methods}<span>rrf ${r.rrf_score.toFixed(4)}</span><span>${rr}</span></div>`;
+    $('.play', el).onclick = () => play(r, el);
+    box.append(el);
+  });
+}
+
+// ---- playback: seek to the match, stop when its utterance ends
+const audio = $('#audio'); let stopAt = null;
+function play(r, card) {
+  $('#player').style.display = 'block';
+  $('#nowplaying').textContent = `${r.speaker}, ${r.timestamp}`;
+  document.querySelectorAll('.card.playing').forEach(c => c.classList.remove('playing'));
+  card.classList.add('playing');
+  const start = Math.max(0, r.jump_ms / 1000 - 1.5);
+  stopAt = r.end_ms / 1000 + 0.5;
+  const src = '/audio/' + encodeURIComponent(r.recording_id);
+  const go = () => { audio.currentTime = start; audio.play(); };
+  if (!audio.src.endsWith(src)) { audio.src = src; audio.addEventListener('loadedmetadata', go, { once: true }); audio.load(); }
+  else go();
+}
+audio.ontimeupdate = () => { if (stopAt && audio.currentTime >= stopAt) { audio.pause(); stopAt = null; } };
+audio.onseeking = () => { stopAt = null; };
+
+// ---- evaluation tab (reads eval/report.json)
+const CONF = [['lexical_only', 'Keyword only'], ['fuzzy_only', 'Fuzzy only'], ['semantic_only', 'Semantic only'],
+  ['hybrid', 'Hybrid (RRF)'], ['hybrid_rerank', 'Hybrid + rerank (default)']];
+let evalLoaded = false;
+async function loadEval() {
+  if (evalLoaded) return; const box = $('#tab-eval');
+  const r = await fetch('/api/eval'); const d = await r.json();
+  if (!r.ok) { box.innerHTML = `<div class="empty">${esc(d.error)}</div>`; return; }
+  const f = x => x.toFixed(3);
+  let h = `<h2>Ablation across ${d.hybrid_rerank.summary.n_queries} labelled queries</h2><div class="tablewrap"><table>
+    <tr><th>Configuration</th><th>Recall@1</th><th>Recall@5</th><th>MRR</th><th>nDCG@10</th></tr>`;
+  for (const [k, name] of CONF) {
+    const s = d[k].summary;
+    h += `<tr class="${k === 'hybrid_rerank' ? 'best' : ''}"><td>${name}</td><td>${f(s['recall@1'])}</td><td>${f(s['recall@5'])}</td><td>${f(s.mrr)}</td><td>${f(s['ndcg@10'])}</td></tr>`;
+  }
+  h += `</table></div><p class="note">Targets set before measuring: Recall@5 &ge; 0.85, MRR &ge; 0.7. The reranker cutoff and four gold labels were adjusted against this same query set, so treat the headline as optimistic, not held-out.</p>
+    <h2>By query category (hybrid + rerank)</h2><div class="tablewrap"><table>
+    <tr><th>Category</th><th>Queries</th><th>Recall@1</th><th>Recall@5</th><th>MRR</th></tr>`;
+  for (const [c, s] of Object.entries(d.hybrid_rerank.by_category).sort())
+    h += `<tr><td>${esc(c.replaceAll('_', ' '))}</td><td>${s.n}</td><td>${f(s['recall@1'])}</td><td>${f(s['recall@5'])}</td><td>${f(s.mrr)}</td></tr>`;
+  h += '</table></div>';
+  const misses = d.hybrid_rerank.per_query.filter(q => q['recall@5'] < 1);
+  h += `<h2>Queries that did not fully pass (${misses.length})</h2><div class="tablewrap"><table><tr><th>Query</th><th>Category</th><th>Recall@5</th></tr>`;
+  for (const q of misses) h += `<tr><td>${esc(q.query)}</td><td>${esc(q.category.replaceAll('_', ' '))}</td><td>${f(q['recall@5'])}</td></tr>`;
+  box.innerHTML = h + '</table></div>'; evalLoaded = true;
+}
+
+// ---- corpus tab
+let corpusLoaded = false;
+async function loadCorpus() {
+  if (corpusLoaded) return; const box = $('#tab-corpus');
+  const rows = await (await fetch('/api/recordings')).json();
+  let h = '<h2>Recordings</h2><div class="tablewrap"><table><tr><th>Title</th><th>Language</th><th>Length</th><th>Utterances</th><th>Speakers</th></tr>';
+  for (const r of rows) h += `<tr><td>${esc(r.title)}</td><td>${esc(r.language)}</td><td>${fmt(r.duration_ms)}</td><td>${r.utterances}</td><td style="text-align:left">${esc(r.speakers.join(', '))}</td></tr>`;
+  box.innerHTML = h + '</table></div><p class="note">Speaker labels for the Hema Malini recording are unreliable (diarization collapsed most of it into one speaker); it is searchable but excluded from labelled evaluation.</p>';
+  corpusLoaded = true;
+}
+</script>
+</body>
+</html>
