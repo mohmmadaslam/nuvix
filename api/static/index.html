@@ -229,7 +229,7 @@ async function loadEval() {
     const s = d[k].summary;
     h += `<tr class="${k === 'hybrid_rerank' ? 'best' : ''}"><td>${name}</td><td>${f(s['recall@1'])}</td><td>${f(s['recall@5'])}</td><td>${f(s.mrr)}</td><td>${f(s['ndcg@10'])}</td></tr>`;
   }
-  h += `</table></div><p class="note">Targets set before measuring: Recall@5 &ge; 0.85, MRR &ge; 0.7. The reranker cutoff and four gold labels were adjusted against this same query set, so treat the headline as optimistic, not held-out.</p>
+  h += `</table></div><p class="note">Targets set before measuring: Recall@5 &ge; 0.85, MRR &ge; 0.7. The reranker cutoff and four gold labels were adjusted against this same query set, so treat the headline as optimistic, not held-out. Measured locally with 30 rerank candidates; the hosted demo scores 15 to stay fast on CPU (Recall@5 0.905, MRR 0.920 on the same set).</p>
     <h2>By query category (hybrid + rerank)</h2><div class="tablewrap"><table>
     <tr><th>Category</th><th>Queries</th><th>Recall@1</th><th>Recall@5</th><th>MRR</th></tr>`;
   for (const [c, s] of Object.entries(d.hybrid_rerank.by_category).sort())
@@ -240,6 +240,14 @@ async function loadEval() {
   for (const q of misses) h += `<tr><td>${esc(q.query)}</td><td>${esc(q.category.replaceAll('_', ' '))}</td><td>${f(q['recall@5'])}</td></tr>`;
   box.innerHTML = h + '</table></div>'; evalLoaded = true;
 }
+
+// ---- deep link: /?q=Mars+colony opens with that search already run
+const initialQuery = new URLSearchParams(location.search).get('q');
+if (initialQuery) { $('#q').value = initialQuery; run(); }
+
+// ---- deep link: /#eval or /#corpus opens that tab
+const initialTab = location.hash.slice(1);
+if (initialTab === 'eval' || initialTab === 'corpus') $(`nav button[data-tab="${initialTab}"]`).click();
 
 // ---- corpus tab
 let corpusLoaded = false;
