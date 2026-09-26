@@ -143,9 +143,19 @@ def _best_word_timestamp(cur, utterance_id: int, terms: list[str]) -> int | None
     return row[0] if row else None
 
 
+ALL_LEGS = frozenset({"lexical", "fuzzy", "semantic"})
+
+
 def search(
-    query: str, top_k: int = 10, rerank: bool = True, min_rerank_score: float = MIN_RERANK_SCORE
+    query: str,
+    top_k: int = 10,
+    rerank: bool = True,
+    min_rerank_score: float = MIN_RERANK_SCORE,
+    legs: frozenset[str] = ALL_LEGS,
 ) -> list[dict]:
+    """`legs` restricts which retrieval methods actually run - used by the
+    ablation study (eval/run_eval.py) to compare lexical-only, semantic-
+    only, and full-hybrid recall against the gold query set."""
     model = get_model()
     query_vector = Vector(model.encode(query, normalize_embeddings=True))
     terms = _query_terms(query)
@@ -153,9 +163,9 @@ def search(
     with psycopg.connect(DATABASE_URL) as conn:
         register_vector(conn)
         with conn.cursor() as cur:
-            lex = lexical_search(cur, query)
-            fuz = fuzzy_search(cur, query)
-            sem = semantic_search(cur, query_vector)
+            lex = lexical_search(cur, query) if "lexical" in legs else []
+            fuz = fuzzy_search(cur, query) if "fuzzy" in legs else []
+            sem = semantic_search(cur, query_vector) if "semantic" in legs else []
 
             fused = rrf_fuse(lex, fuz, sem)
             pool_size = RERANK_POOL if rerank else top_k
@@ -167,7 +177,7 @@ def search(
             cur.execute(
                 """
                 SELECT u.id, r.title, r.id AS recording_id, s.display_name,
-                       u.start_ms, u.text_raw,
+                       u.start_ms, u.end_ms, u.text_raw,
                        ts_headline('simple', u.text_raw, websearch_to_tsquery('simple', %s),
                                    'StartSel=**, StopSel=**, HighlightAll=true') AS snippet
                 FROM utterances u
@@ -187,7 +197,7 @@ def search(
 
     if rerank:
         reranker = get_reranker()
-        pairs = [(query, rows[uid][5]) for uid in candidates]
+        pairs = [(query, rows[uid][6]) for uid in candidates]
         scores = reranker.predict(pairs)
         order = sorted(range(len(candidates)), key=lambda i: scores[i], reverse=True)
         rerank_scores = {candidates[i]: round(float(scores[i]), 4) for i in range(len(candidates))}
@@ -208,7 +218,7 @@ def search(
 
     results = []
     for uid in ranked_ids:
-        _, title, recording_id, speaker, start_ms, text, snippet = rows[uid]
+        _, title, recording_id, speaker, start_ms, end_ms, text, snippet = rows[uid]
         jump_ms = word_ts.get(uid) or start_ms
         mm, ss = divmod(jump_ms // 1000, 60)
         results.append(
@@ -221,6 +231,8 @@ def search(
                 "recording_id": recording_id,
                 "title": title,
                 "speaker": speaker,
+                "start_ms": start_ms,  # utterance's own bounds - used for gold-interval matching in eval/
+                "end_ms": end_ms,
                 "timestamp": f"{mm:02d}:{ss:02d}",
                 "text": text,
                 "snippet": snippet,
