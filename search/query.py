@@ -50,7 +50,7 @@ _RERANKER = None
 def get_model() -> SentenceTransformer:
     global _MODEL
     if _MODEL is None:
-        device = "mps" if torch.backends.mps.is_available() else "cpu"
+        device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
         log.info(f"Loading BAAI/bge-m3 on {device}...")
         _MODEL = SentenceTransformer("BAAI/bge-m3", device=device)
     return _MODEL
@@ -59,7 +59,7 @@ def get_model() -> SentenceTransformer:
 def get_reranker() -> CrossEncoder:
     global _RERANKER
     if _RERANKER is None:
-        device = "mps" if torch.backends.mps.is_available() else "cpu"
+        device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
         log.info(f"Loading BAAI/bge-reranker-v2-m3 on {device}...")
         _RERANKER = CrossEncoder("BAAI/bge-reranker-v2-m3", device=device)
     return _RERANKER
