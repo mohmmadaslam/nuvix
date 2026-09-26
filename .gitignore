@@ -18,3 +18,8 @@ venv/
 
 # Model caches
 .cache/
+
+# Derived, regenerable pipeline intermediate outputs (transcripts,
+# diarization, embeddings, etc.) - not committed, reproducible from
+# data/videos + data/manifest.yaml + ingest/ code.
+data/pipeline/
