@@ -32,6 +32,14 @@ log = get_logger("chunk")
 MIN_UTTERANCE_MS = 10_000
 MAX_UTTERANCE_MS = 40_000
 MAX_WORDS = 120
+# A turn this short is almost always a diarization-boundary artifact (a
+# turn-boundary flicker mid-sentence), not a genuine standalone utterance -
+# e.g. a real sentence split into a 20ms/1-word orphan plus the remainder
+# attributed to the other speaker. Rather than index the orphan as its own
+# degenerate retrieval unit (which also produces erratic cross-encoder
+# scores on very short text), merge it into a neighbor.
+MIN_RAW_TURN_WORDS = 3
+MIN_RAW_TURN_MS = 300
 SENTENCE_END_RE = re.compile(r"[.?!]$")
 FILLER_WORDS = {"um", "uh", "umm", "uhh", "uhm", "mm", "hmm", "erm"}
 
@@ -110,6 +118,49 @@ def normalize_text(text: str) -> str:
     return " ".join(tokens)
 
 
+def merge_degenerate_turns(raw_utterances: list[dict]) -> list[dict]:
+    """Merge turns shorter than MIN_RAW_TURN_WORDS/MIN_RAW_TURN_MS into
+    whichever neighbor has more words (the likely true owner of the
+    sentence), rather than indexing the fragment as its own retrieval
+    unit. Loops until stable since a merge can itself still be short."""
+
+    def is_degenerate(u: dict) -> bool:
+        if not u["words"]:
+            return True
+        dur = u["words"][-1]["end_ms"] - u["words"][0]["start_ms"]
+        return len(u["words"]) < MIN_RAW_TURN_WORDS or dur < MIN_RAW_TURN_MS
+
+    items = list(raw_utterances)
+    changed, guard = True, 0
+    while changed and guard < len(raw_utterances) + 5:
+        changed, guard = False, guard + 1
+        result: list[dict] = []
+        i = 0
+        while i < len(items):
+            u = items[i]
+            if is_degenerate(u) and len(items) > 1:
+                has_prev, has_next = bool(result), i + 1 < len(items)
+                prev_n = len(result[-1]["words"]) if has_prev else -1
+                next_n = len(items[i + 1]["words"]) if has_next else -1
+                if has_next and (not has_prev or next_n >= prev_n):
+                    nxt = items[i + 1]
+                    result.append({"speaker": nxt["speaker"], "words": u["words"] + nxt["words"]})
+                    i += 2
+                elif has_prev:
+                    prev = result.pop()
+                    result.append({"speaker": prev["speaker"], "words": prev["words"] + u["words"]})
+                    i += 1
+                else:
+                    result.append(u)
+                    i += 1
+                changed = True
+            else:
+                result.append(u)
+                i += 1
+        items = result
+    return items
+
+
 def build_utterances(recording_id: str) -> list[dict]:
     data = load_json(SPEAKER_WORDS_DIR / f"{recording_id}.json")
     turns = group_into_turns(data["words"])
@@ -118,6 +169,14 @@ def build_utterances(recording_id: str) -> list[dict]:
     for turn in turns:
         for word_group in split_turn_into_utterances(turn):
             raw_utterances.append({"speaker": turn["speaker"], "words": word_group})
+
+    n_before = len(raw_utterances)
+    raw_utterances = merge_degenerate_turns(raw_utterances)
+    if len(raw_utterances) < n_before:
+        log.warning(
+            f"merged {n_before - len(raw_utterances)} degenerate short turn(s) "
+            "(likely diarization-boundary artifacts) into a neighbor"
+        )
 
     utterances = []
     for seq, u in enumerate(raw_utterances):
