@@ -224,7 +224,37 @@ own `notes` field rather than editing it silently. The relabelling and the cutof
 against the same small gold set the results are reported on, so the headline number is
 optimistic; it is not a held-out measurement.
 
-## 10. How the collaboration went: the owner drove toward the best solution
+## 10. Demo UI and deployment
+
+The project owner asked for a UI, then for the application to be deployed. The agent built a
+small local web app (`api/`, standard library only) that calls the same `search()` the
+evaluation uses, so the UI shows the measured system: per-method toggles, highlighted
+snippets, scores, and an audio player that seeks to the matching word. It verified the
+server through its API but could not view the page itself, and said so.
+
+Deployment was mostly a sequence of walls, each found by trying it:
+- **Hugging Face Spaces** was the agent's first recommendation (free, 16 GB). Uploading failed
+  with `402 Payment Required`: Docker Spaces now need a paid plan. The agent had built the
+  Dockerfile and bundle before finding this, so that code is kept as an alternative.
+- The owner asked whether GitHub could host it. The agent explained that Pages is static-only
+  and Codespaces is temporary, then offered Modal, Cloud Run and a laptop tunnel; the owner
+  chose **Modal**. The agent also stated it was working from memory on free-tier terms and
+  asked the owner to check.
+- On Modal the first build failed on **Python 3.11** (the pinned `numpy==2.5.3` needs 3.12+),
+  the second on **missing CA certificates** in the Postgres base image, and the deploy on
+  **T4 GPUs requiring a payment method**. The owner had chosen not to add a card, so the agent
+  switched to CPU rather than ask them to change that.
+- On CPU, reranked searches took 6-20 seconds. Rather than guess, the agent measured the
+  accuracy cost of scoring fewer candidates on the gold set (pool 10: Recall@5 0.883; pool 15:
+  0.905; pool 30: 0.913) and chose 15, which is within noise of 30 at about half the time. The
+  deployed system therefore differs from the one the README's headline numbers were measured on,
+  and the README says so.
+
+Credentials: the owner pasted GitHub, Hugging Face and Modal tokens into the chat. The agent
+passed each only through a one-off environment variable, never wrote one to a file or git config,
+and repeatedly asked the owner to revoke them afterwards.
+
+## 11. How the collaboration went: the owner drove toward the best solution
 
 This section records, at the project owner's (Aslam's) request, the character of the
 collaboration - kept to what is visible in the record above and in this session.

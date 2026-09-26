@@ -212,6 +212,18 @@ Documented as they were found, not smoothed over:
   once complete — results should be read with that in mind, not over-interpreted as
   precise population statistics.
 
+## Live demo
+
+**https://mohmmadaslam--nuvix-web.modal.run** - the same UI, running on Modal (4 CPU cores, no GPU).
+It scales to zero when idle, so the first request after a pause takes about 45 seconds while the
+container starts, loads the models and rebuilds the database from a dump. After that, searches
+with rerank on take about 5-8 seconds on CPU (under 1 second with Rerank off). To keep that
+tolerable, the deployment scores 15 rerank candidates instead of 30 (`NUVIX_RERANK_POOL`); on the
+44-query gold set that measured Recall@5 0.905 / MRR 0.920 against 0.913 / 0.909 at 30. The
+numbers in this README are from the local, pool-30 run. To redeploy: `python -m deploy.build_space`
+then `modal deploy deploy/modal_app.py` ([deploy/](deploy/)). A Hugging Face Docker Space bundle is
+also included, but Hugging Face now requires a paid plan for those.
+
 ## Demo UI
 
 `python -m api.server` serves a local web UI at http://127.0.0.1:8000 with three tabs:
@@ -227,6 +239,7 @@ as the CLI and the eval, so what it shows is the measured system.
 ```
 data/           manifest, videos, extracted audio, golden query labels
 db/             Postgres schema
+deploy/         Modal deployment (GPU-free container: Postgres + models + server) and a Hugging Face Space bundle
 api/            local demo server + single-page search UI (stdlib only, no extra dependencies)
 ingest/         transcription -> diarization -> chunking -> embedding -> load pipeline
 search/         hybrid retrieval (lexical + fuzzy + semantic + RRF + rerank)

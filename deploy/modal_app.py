@@ -3,8 +3,8 @@
     python -m deploy.build_space                 # stage the bundle (DB dump, audio, code)
     modal deploy deploy/modal_app.py             # prints the public URL
 
-One container runs Postgres 17 + pgvector, the search models on a T4 GPU and the demo
-server. It scales to zero when idle (the first search after a pause waits for a cold
+One container runs Postgres 17 + pgvector, the search models and the demo
+server, on 4 CPU cores. It scales to zero when idle (the first search after a pause waits for a cold
 start) and is capped at one container so cost cannot run away.
 """
 from pathlib import Path
@@ -17,8 +17,9 @@ BUNDLE = Path(__file__).resolve().parent / "build" / "space"
 app = modal.App("nuvix")
 
 image = (
-    modal.Image.from_registry("pgvector/pgvector:pg17", add_python="3.11")
+    modal.Image.from_registry("pgvector/pgvector:pg17", add_python="3.13")
     .entrypoint([])  # drop the postgres image's docker-entrypoint
+    .apt_install("ca-certificates")  # the base image has none, so HTTPS to huggingface.co fails
     .pip_install(
         "torch",
         "sentence-transformers==6.1.0",
@@ -35,6 +36,8 @@ image = (
         "HF_HOME": "/models",
         "DATABASE_URL": "postgresql://postgres@127.0.0.1:5432/audio_search",
         "TOKENIZERS_PARALLELISM": "false",
+        "SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt",
+        "REQUESTS_CA_BUNDLE": "/etc/ssl/certs/ca-certificates.crt",
     })
     # Bake the models into the image so a cold start does not download ~4.5 GB.
     .run_commands(
@@ -49,7 +52,8 @@ image = (
 
 @app.function(
     image=image,
-    gpu="T4",
+    cpu=4.0,                # CPU only: a GPU needs a payment method on the account
+    memory=8192,            # two ~2.3 GB models + Postgres
     scaledown_window=300,   # stay warm 5 min after the last request
     max_containers=1,       # one container: caps cost and keeps the DB copy consistent
     timeout=3600,
