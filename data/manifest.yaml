@@ -20,22 +20,20 @@
 # is not public redistribution. This repo must never be made public or
 # pushed to a public remote without re-evaluating this decision. See
 # docs/ARCHITECTURE.md Section 2.
+#
+# DROPPED (2026-09-26): bbc-social-media-bans ("Bans on social media and
+# phones... BBC World Service"). Its description named 5+ distinct voices
+# (unnamed host, journalist Hayley Clarke, correspondent Hannah Ritchie,
+# two professors, student vox-pops) - a produced multi-voice segment, not
+# a two-person conversation, so it did not satisfy the task's two-speaker
+# requirement. Removed rather than swapped in favor of a replacement;
+# dataset is 5 files, which is within the task's 5-6 file range. Source
+# video file removed from data/videos/ and from git.
 
 recordings:
-  - id: bbc-social-media-bans
-    filename: "Bans on social media and phones_ what's the evidence_ - What in the World podcast, BBC World Service.mp4"
-    title: "Bans on social media and phones: what's the evidence? - What in the World podcast"
-    source_url: https://youtu.be/b4jTc1YpEgM
-    channel: BBC World Service
-    license: "Standard YouTube License (all rights reserved) - not CC"
-    language: en
-    duration_sec: 1188.6
-    num_speakers: 2
-    speakers: TBD          # first-appearance order, e.g. [Host Name, Guest Name]
-    notes: BBC World Service podcast episode.
-
   - id: elon-musk-build-the-future
     filename: "Elon Musk _ How to Build the Future.mp4"
+    audio_path: data/audio/elon-musk-build-the-future.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
     title: "Elon Musk: How to Build the Future"
     source_url: https://youtu.be/tnBQmEqBCY0
     channel: Y Combinator
@@ -43,11 +41,12 @@ recordings:
     language: en
     duration_sec: 1172.9
     num_speakers: 2
-    speakers: TBD
-    notes: Y Combinator-style interview format.
+    speakers: [Sam Altman, Elon Musk]   # confirmed via web search: YC "How to Build the Future" series, published 2017-05-15
+    notes: Y Combinator "How to Build the Future" interview series.
 
   - id: hema-malini-podcast
     filename: "Hema Malini On Dharmendra Ji, Highest Paid Actress, Sunny, Bobby Deol, Politics & Bollywood_ Podcast.mp4"
+    audio_path: data/audio/hema-malini-podcast.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
     title: "Hema Malini On Dharmendra Ji, Highest Paid Actress, Sunny, Bobby Deol, Politics & Bollywood"
     source_url: https://youtu.be/VRzNXjrHXJk
     channel: Hindi Rush
@@ -55,11 +54,12 @@ recordings:
     language: hi           # Hindi/Hinglish - verify code-switching level during transcription
     duration_sec: 1072.3
     num_speakers: 2
-    speakers: TBD
+    speakers: [Harshvardhan Pathak, Hema Malini]   # host name provided by project owner, 2026-09-26 (not publicly listed on channel)
     notes: Bollywood-focused interview podcast; likely Hindi-English code-switched.
 
   - id: illuminati-hindi-explanation
     filename: "ILLUMINATI _ Detailed Hindi Explanation & Reality (Shocking).mp4"
+    audio_path: data/audio/illuminati-hindi-explanation.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
     title: "ILLUMINATI: Detailed Hindi Explanation & Reality"
     source_url: https://youtu.be/0A6TIiy5DCU
     channel: "TRS Clips | The Ranveer Show Clips"
@@ -67,11 +67,12 @@ recordings:
     language: hi
     duration_sec: 855.6
     num_speakers: 2        # confirmed two-person conversation (not solo narration) - 2026-09-26
-    speakers: TBD
-    notes: Confirmed two speakers by user despite "explanation" framing in title.
+    speakers: [Ranveer Allahbadia, Ankit Awasthi]   # confirmed via video description: The Ranveer Show ep. 442, guest is geopolitics commentator Ankit Awasthi
+    notes: Confirmed two speakers by user despite "explanation" framing in title. Full episode covers geopolitics/current affairs (Illuminati is one segment within it).
 
   - id: raj-shamani-vikas-diviyakirti
     filename: "The One Habit That Changes Everything _ Raj Shamani X Dr. Vikas Diviyakirti.mp4"
+    audio_path: data/audio/raj-shamani-vikas-diviyakirti.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
     title: "The One Habit That Changes Everything - Raj Shamani X Dr. Vikas Diviyakirti"
     source_url: https://youtu.be/LhgEfBXWfak
     channel: Raj Shamani Highlights
@@ -79,11 +80,12 @@ recordings:
     language: hi
     duration_sec: 625.6
     num_speakers: 2
-    speakers: TBD
+    speakers: [Raj Shamani, Dr. Vikas Diviyakirti]   # confirmed via title
     notes: Raj Shamani interview podcast; likely Hindi-English code-switched.
 
   - id: gaur-gopal-das-rj-kartik
     filename: "जीवन में आपके सोचने का तरीक़ा बदल देगा गुरु GAUR GOPAL DAS जी का ये PODCAST _ RJ KARTIK STORY.mp4"
+    audio_path: data/audio/gaur-gopal-das-rj-kartik.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
     title: "Gaur Gopal Das with RJ Kartik - PODCAST / STORY"
     source_url: https://youtu.be/SSyc52SsdrM
     channel: Rj Kartik
@@ -91,5 +93,5 @@ recordings:
     language: hi
     duration_sec: 945.3
     num_speakers: 2
-    speakers: TBD
+    speakers: [RJ Kartik, Gaur Gopal Das]   # confirmed via title
     notes: RJ Kartik hosting Gaur Gopal Das; likely Hindi-English code-switched.
