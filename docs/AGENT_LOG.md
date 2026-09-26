@@ -1,4 +1,4 @@
-# Coding agent collaboration disclosure
+# Coding agent collaboration disclosure — NUVIX
 
 This project was built in collaboration with **Claude** (Anthropic's coding agent, running
 as Claude Code), per the hackathon's disclosure requirement. This document summarizes how

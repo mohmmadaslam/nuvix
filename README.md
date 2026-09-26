@@ -1,6 +1,7 @@
-# Hybrid search over two-speaker audio transcripts
+# NUVIX — Hybrid Intelligence for Audio
 
-G2 AI Hiring Hackathon — Problem Statement 1 (Multimodal AI: Audio search).
+Hybrid search over two-speaker audio transcripts. Built for the G2 AI Hiring Hackathon —
+Problem Statement 1 (Multimodal AI: Audio search).
 
 **Status: in progress.** This README is being written alongside the remaining engineering
 work. Sections marked `[TODO]` depend on the full 5-file corpus finishing ingestion and are
