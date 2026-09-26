@@ -1,0 +1,28 @@
+# Top-level dependencies (loose floors). Exact resolved versions are
+# pinned by pip-compile/pip freeze into requirements.txt for reproducibility.
+
+# ASR
+faster-whisper>=1.0
+
+# Diarization (pulls torch/torchaudio as transitive deps)
+pyannote.audio>=3.1
+
+# Embeddings + reranking
+sentence-transformers>=3.0
+
+# Database
+psycopg[binary]>=3.1
+pgvector>=0.3
+
+# API
+fastapi>=0.110
+uvicorn[standard]>=0.29
+
+# Utilities
+pyyaml>=6.0
+python-dotenv>=1.0
+numpy>=1.26
+tqdm>=4.66
+
+# Testing
+pytest>=8.0

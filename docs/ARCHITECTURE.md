@@ -106,7 +106,13 @@ uniformly, across every file in the set - simpler and more robust for a mixed-la
 Each utterance stores `text_raw` (display) and `text_norm` (disfluencies removed, numbers
 normalized; indexing).
 
-## 4. Storage: Postgres 16 + pgvector + pg_trgm
+## 4. Storage: Postgres 17 + pgvector + pg_trgm
+
+Running natively via Homebrew rather than Docker (decided 2026-09-26 — Docker Desktop wasn't
+installed and needed manual GUI setup; native Postgres was faster to get working on a single
+dev machine). Version is 17, not the originally planned 16, because Homebrew's `pgvector`
+bottle only builds against Postgres 17/18 — no functional difference for this project, since
+nothing here depends on a 16-specific feature.
 
 ```
 recordings(id, title, source_url, license, language, duration_ms, video_path, audio_path)
@@ -169,7 +175,7 @@ ASR-damaged proper noun, speaker-filtered, cross-file topic, **cross-lingual sem
 - **Labels are time intervals**, not chunk IDs: `(recording_id, start_ms, end_ms, speaker)`. A
   hit counts as relevant if it overlaps a gold interval (±3s tolerance) — this keeps labels
   valid even if chunking, embedding model, or FTS config changes later.
-- **Automated tests** (pytest + docker-compose Postgres):
+- **Automated tests** (pytest against the local Postgres 17 instance):
   - Recall@1/5/10, MRR, nDCG@10 — overall and per query category.
   - Ablation: lexical-only vs. vector-only vs. hybrid-RRF vs. hybrid+rerank; asserts hybrid
     beats each single method and clears a Recall@5 threshold.
@@ -207,7 +213,7 @@ search/   (query parser, SQL retrieval, fusion, rerank, highlight)
 api/, cli/
 eval/     (metrics, ablation runner, report generator)
 tests/    (pytest: recall@k thresholds, WER, speaker accuracy)
-docker-compose.yml (postgres + pgvector)
+requirements.in / requirements.txt (pinned), .env.example (DB URL, HF token placeholder)
 docs/ARCHITECTURE.md (this file), docs/AGENT_LOG.md (agent-collaboration disclosure)
 README.md (results, success criteria, limitations)
 ```
@@ -217,10 +223,14 @@ README.md (results, success criteria, limitations)
 - **pyannote requires gated Hugging Face model access** — must be accepted before ingestion.
 - **Overlapping/crosstalk speech** will be credited to one speaker only by diarization.
 - **Code-switched Hindi/English ASR** is inherently harder than monolingual transcription;
-  WER is expected to run higher on the 4 Hindi files than the 2 English files, reported
+  WER is expected to run higher on the 4 Hindi files than the 1 English file, reported
   separately rather than as one blended number.
 - **File lengths exceed the spec's 8-10 min target** (10.4-19.8 min) — documented deviation,
   decided in favor of unedited full episodes (see Section 2).
 - **Repo is private by design** — raw video/audio (standard-license YouTube, not CC) is
   committed on that basis. Never push this repo, or these files, to a public remote.
+- **Dataset is 5 files, not 6** — one (BBC "What in the World") was dropped for having 5+
+  distinct voices rather than two (see Section 2); 5 is within the task's stated 5-6 range.
+- **Postgres runs natively via Homebrew, on version 17 not 16** — pgvector's Homebrew bottle
+  only supports 17/18; no functional impact (see Section 4).
 - **50 queries is a small eval set** — results reported with this caveat, not over-interpreted.
