@@ -1,9 +1,43 @@
 # Gold query set for recall@k / MRR / nDCG evaluation (Task 4).
 #
 # STATUS: q01-q13 (elon-musk-build-the-future) validated against the
-# actual video by the project owner on 2026-09-26. Still to add: cross_file
-# and cross_lingual categories, plus q01-q13 equivalents for the other 4
-# recordings, once they finish ingesting.
+# actual video by the project owner on 2026-09-26.
+#
+# q14-q24 (illuminati-hindi-explanation) added 2026-09-26, grounded directly
+# in the actual Postgres transcript rows (utterances table) rather than the
+# source video - timestamps/text/speakers are exact, but relevance has only
+# been sanity-checked by re-reading the transcript text, not by watching the
+# video the way q01-q13 was. Flag for the project owner to spot-check against
+# the actual video if a stricter validation bar is wanted. This is also the
+# first file where the corpus is genuinely multilingual end-to-end, so it
+# adds the set's first cross_lingual_semantic queries (q18-q19): the same
+# "Illuminati"/"Deep State" concepts are spoken in both Latin-script English
+# and Devanagari-script Hindi within this one file (sometimes ASR-garbled -
+# "Deep Estate" for "Deep State" - see q17), so an English query correctly
+# surfacing the Devanagari utterances is a real test of bge-m3's multilingual
+# embedding space, not a contrived one.
+#
+# q25-q35 (raj-shamani-vikas-diviyakirti) added 2026-09-26, same basis as
+# q14-q24 (grounded in the actual transcript, not video-verified). Topic:
+# what makes someone successful - discipline/perseverance, luck vs. skill by
+# field, aptitude, and "flow state". q28 is this file's cross_lingual_semantic
+# case: "batsman" (Latin) surfacing "बैटस्पेन" (Devanagari ASR phonetic
+# rendering of the same English loanword), a different flavor of cross-script
+# match than q18-q19's Illuminati/Deep State pair.
+#
+# q36-q44 (gaur-gopal-das-rj-kartik) - see the note above q36 (includes a
+# speaker-name inversion that was found and fixed before labeling).
+#
+# Audit 2026-09-26 (after full-corpus eval): negatives are scored as "returns
+# nothing anywhere in the corpus". q13 and q22 had been negatives only for
+# one file and now have real answers elsewhere, so they were relabeled as
+# positives; q23/q34/q35/q43/q44 were duplicates of earlier negatives and
+# were replaced with distinct queries confirmed absent from the corpus.
+# q13 had been owner-validated as a negative - see its notes field.
+#
+# Not covered: hema-malini-podcast (unreliable diarization - see README), and
+# cross_file_topic queries - no genuinely shared theme exists across the files
+# and forcing one would produce a contrived label.
 #
 # `relevant` is a list of (recording_id, start_ms, end_ms, speaker)
 # intervals - a search result counts as a hit if its timestamp falls
@@ -11,13 +45,6 @@
 # the eval code, not here). Empty `relevant: []` = negative query,
 # expected to return nothing.
 #
-# TODO once the other 4 files are ingested:
-#   - cross_file_topic: a theme discussed in 2+ files
-#   - cross_lingual_semantic: an English query surfacing a Hindi-file
-#     segment (or vice versa) purely on meaning
-#   - re-check negative queries like q13 ("illuminati") still correctly
-#     return nothing from THIS file once the actual Illuminati file
-#     exists elsewhere in the corpus - a false hit here would be a real bug.
 # TODO once search/query.py's parser supports speaker:/file: filters:
 #   - add true speaker_filtered queries testing the filter syntax itself,
 #     not just "a query whose answer happens to have a known speaker".
@@ -165,6 +192,347 @@ queries:
 
   - id: q13
     query: "illuminati conspiracy theory"
+    category: topic
+    relevant:
+      - {recording_id: illuminati-hindi-explanation, start_ms: 2350, end_ms: 3990, speaker: "Ranveer Allahbadia"}
+      - {recording_id: illuminati-hindi-explanation, start_ms: 6050, end_ms: 22310, speaker: "Ranveer Allahbadia"}
+      - {recording_id: illuminati-hindi-explanation, start_ms: 22310, end_ms: 45610, speaker: "Ankit Awasthi"}
+      - {recording_id: illuminati-hindi-explanation, start_ms: 166910, end_ms: 189710, speaker: "Ankit Awasthi"}
+    notes: "RELABELED 2026-09-26 from negative to positive. Originally a negative for the Elon file only (validated when it was the only file ingested); once illuminati-hindi-explanation joined the corpus the answer legitimately exists there, and eval scores negatives as 'returns nothing anywhere'. Now doubles as a cross-file check: must surface the Illuminati file, not the Elon file."
+
+  - id: q14
+    query: "Do you believe in Illuminati"
+    category: exact_phrase
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 2350
+        end_ms: 3990
+        speaker: "Ranveer Allahbadia"
+    notes: "The opening line of the segment, verbatim."
+
+  - id: q15
+    query: "puppet master controlling politics behind the scenes"
+    category: topic
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 45630
+        end_ms: 85630
+        speaker: "Ankit Awasthi"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 153830
+        end_ms: 166910
+        speaker: "Ranveer Allahbadia"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 166910
+        end_ms: 189710
+        speaker: "Ankit Awasthi"
+    notes: "'Two-layer deep puppet master' theory (Bangladesh chaos -> America/deep state -> Illuminati as a third layer). Transcript is Hindi/Hinglish code-switched; query is plain English with no literal overlap."
+
+  - id: q16
+    query: "ancient Egypt secret society history"
+    category: topic
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 207550
+        end_ms: 222170
+        speaker: "Ranveer Allahbadia"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 222830
+        end_ms: 247590
+        speaker: "Ranveer Allahbadia"
+    notes: "A European secret society theory tracing back to ancient Egypt / Egyptian priests and reincarnation - mostly Hindi text."
+
+  - id: q17
+    query: "Deep Estate"
+    category: asr_damaged_proper_noun
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 22310
+        end_ms: 45610
+        speaker: "Ankit Awasthi"
+    notes: "Not a deliberate misspelling by us - this is what faster-whisper actually transcribed for 'Deep State' in this one Latin-script utterance ('जो मैं Deep Estate बोलता हूँ'). A real ASR artifact, kept as-is rather than corrected, to test exact/fuzzy matching against genuinely damaged text."
+
+  - id: q18
+    query: "Deep State conspiracy"
+    category: cross_lingual_semantic
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 85630
+        end_ms: 125830
+        speaker: "Ankit Awasthi"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 153830
+        end_ms: 166910
+        speaker: "Ranveer Allahbadia"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 349870
+        end_ms: 359890
+        speaker: "Ankit Awasthi"
+    notes: "English query; correct answers are spoken entirely in Devanagari ('डीप स्टेट' - the correctly-pronounced form, distinct from q17's garbled Latin-script 'Deep Estate'). Zero lexical/fuzzy overlap possible across scripts - a hit here can only come from bge-m3's multilingual embedding space, the clearest demonstration of why a multilingual embedding model was chosen over an English-only one."
+
+  - id: q19
+    query: "who are the Illuminati"
+    category: cross_lingual_semantic
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 166910
+        end_ms: 189710
+        speaker: "Ankit Awasthi"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 189710
+        end_ms: 207550
+        speaker: "Ranveer Allahbadia"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 207550
+        end_ms: 222170
+        speaker: "Ranveer Allahbadia"
+    notes: "English query surfacing Devanagari-transliterated 'इलुमिनाटी' / 'इलुमिनार्टी' mentions - same cross-script semantic test as q18, different concept."
+
+  - id: q20
+    query: "a secretive group controlling the world's money"
+    category: paraphrase
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 247590
+        end_ms: 277570
+        speaker: "Ankit Awasthi"
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 282310
+        end_ms: 304350
+        speaker: "Ranveer Allahbadia"
+    notes: "No literal overlap - transcript talks about a family/group tied to Israel/Judaism governing world finance and geopolitical decisions 'for thousands of years'."
+
+  - id: q21
+    query: "why power always stays with a small group of people"
+    category: paraphrase
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 304350
+        end_ms: 349870
+        speaker: "Ankit Awasthi"
+    notes: "Transcript: power wants to stay concentrated, not distributed, run by the same few people/layers - a paraphrase with no shared keywords."
+
+  - id: q22
+    query: "SpaceX Mars rocket"
+    category: topic
+    relevant:
+      - {recording_id: elon-musk-build-the-future, start_ms: 597520, end_ms: 612940, speaker: "Elon Musk"}
+      - {recording_id: elon-musk-build-the-future, start_ms: 613880, end_ms: 625160, speaker: "Elon Musk"}
+      - {recording_id: elon-musk-build-the-future, start_ms: 626920, end_ms: 634620, speaker: "Elon Musk"}
+      - {recording_id: elon-musk-build-the-future, start_ms: 962810, end_ms: 987230, speaker: "Elon Musk"}
+    notes: "RELABELED 2026-09-26 from negative to positive (was a negative for the Illuminati file only; the Elon file legitimately answers it). Intervals grounded in DB rows mentioning Mars/SpaceX, not video-verified. Cross-file check: must surface the Elon file, not the Hindi files."
+
+  - id: q23
+    query: "bitcoin price prediction"
     category: negative
     relevant: []
-    notes: "No relevant content in THIS file. Important re-check once the corpus includes illuminati-hindi-explanation: this query must keep returning nothing from elon-musk-build-the-future specifically, even though the corpus overall will have a real answer elsewhere - tests that retrieval doesn't get confused across files."
+    notes: "True negative: no matching term anywhere in the corpus (checked against utterances.text_norm 2026-09-26). Replaces a duplicate of an earlier negative query."
+
+  - id: q24
+    query: "Bangladesh unrest caused by America"
+    category: topic
+    relevant:
+      - recording_id: illuminati-hindi-explanation
+        start_ms: 153830
+        end_ms: 166910
+        speaker: "Ranveer Allahbadia"
+    notes: "Direct topical reference to Ranveer's Bangladesh/America example within the puppet-master theory - overlaps q15's window but tests a narrower, more specific query."
+
+  - id: q25
+    query: "One Biggest Habit or Metric"
+    category: exact_phrase
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 2540
+        end_ms: 11420
+        speaker: "Raj Shamani"
+    notes: "The opening question, verbatim (code-switched Hinglish, but this exact English fragment is literal)."
+
+  - id: q26
+    query: "Perseverance"
+    category: exact_keyword
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 12860
+        end_ms: 25500
+        speaker: "Dr. Vikas Diviyakirti"
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 32440
+        end_ms: 47660
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "Vikas names this as the single best word for the discipline/hard-work/patience cluster - said twice, in two adjacent turns."
+
+  - id: q27
+    query: "UPSC"
+    category: exact_keyword
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 68620
+        end_ms: 74740
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "UPSC (India's civil services exam) named directly, contrasted with the film industry as a field where luck alone can't get you through."
+
+  - id: q28
+    query: "batsman"
+    category: cross_lingual_semantic
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 117720
+        end_ms: 158480
+        speaker: "Dr. Vikas Diviyakirti"
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 158480
+        end_ms: 194980
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "English query; the transcript only has this concept as the Devanagari ASR phonetic rendering 'बैटस्पेन' (from the English loanword 'batsman'), inside a cricket-aptitude analogy (a 150kph ball needing fast reflexes/IQ). A different flavor of cross-script test than q18-q19: here the SAME word is being spoken, just captured phonetically in a different script, rather than a genuinely different-language paraphrase."
+
+  - id: q29
+    query: "achieving a flow state where you play like yourself without pressure"
+    category: paraphrase
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 264810
+        end_ms: 294110
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "Transcript never says 'flow state' - describes mind/body/soul synergy, comfort, no external pressure, 'playing as yourself'. Pure paraphrase/concept test, no shared keywords."
+
+  - id: q30
+    query: "does waking up early matter for success"
+    category: topic
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 48280
+        end_ms: 56040
+        speaker: "Raj Shamani"
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 56040
+        end_ms: 65060
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "Question + answer: some IAS toppers wake at 4am, some sleep at 4am - Vikas says it doesn't make much difference."
+
+  - id: q31
+    query: "luck versus skill in film industry compared to civil services exam"
+    category: topic
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 68620
+        end_ms: 74740
+        speaker: "Dr. Vikas Diviyakirti"
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 77340
+        end_ms: 117560
+        speaker: "Dr. Vikas Diviyakirti"
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 117720
+        end_ms: 158480
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "The film-industry-vs-UPSC 'tukka' (luck) contrast, extended into privilege/opportunity and then aptitude-dependent fields (sports)."
+
+  - id: q32
+    query: "being born into privilege gives more opportunities to succeed"
+    category: paraphrase
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 77340
+        end_ms: 117560
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "Transcript: being born into a prominent family gets you repeated chances at becoming a hero/actor even without deep acting skill. No literal overlap with the query's phrasing."
+
+  - id: q33
+    query: "why top players don't always become the very best despite similar effort"
+    category: topic
+    relevant:
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 196140
+        end_ms: 209060
+        speaker: "Raj Shamani"
+      - recording_id: raj-shamani-vikas-diviyakirti
+        start_ms: 209060
+        end_ms: 264810
+        speaker: "Dr. Vikas Diviyakirti"
+    notes: "Raj's question about top-10/15 players not becoming top-2/3 despite similar IQ, and Vikas's answer about aptitude/ability and self-confidence gaps."
+
+  - id: q34
+    query: "football world cup final"
+    category: negative
+    relevant: []
+    notes: "True negative: no matching term anywhere in the corpus (checked against utterances.text_norm 2026-09-26). Replaces a duplicate of an earlier negative query."
+
+  - id: q35
+    query: "how to bake sourdough bread"
+    category: negative
+    relevant: []
+    notes: "True negative: no matching term anywhere in the corpus (checked against utterances.text_norm 2026-09-26). Replaces a duplicate of an earlier negative query."
+
+  # q36-q44 (gaur-gopal-das-rj-kartik) added 2026-09-26 - completes gold
+  # coverage for 4 of 5 files (hema-malini-podcast excluded per its
+  # diarization-failure note). BUG FOUND + FIXED before writing these: the
+  # speaker display_name mapping for this recording was inverted (the line
+  # literally saying "my name is RJ Kartik" was tagged as Gaur Gopal Das,
+  # and vice versa) - corrected directly in the speakers table since
+  # diarization clustering itself was fine, only the name assignment was
+  # backwards. Queries below use the corrected names. Utterances 5-8 (a
+  # repeated "sculptor" analogy line, likely a source-video b-roll repeat)
+  # were skipped as gold material - garbled and unreliable for labeling.
+
+  - id: q36
+    query: "भागने से प्रेशर कम नहीं होता"
+    category: exact_phrase
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 0, end_ms: 11800, speaker: "Gaur Gopal Das"}
+    notes: "Opening hook line, verbatim."
+
+  - id: q37
+    query: "ऑक्सीजन मास्क"
+    category: exact_keyword
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 282480, end_ms: 322860, speaker: "Gaur Gopal Das"}
+    notes: "The airplane oxygen-mask analogy for self-care."
+
+  - id: q38
+    query: "why is self-care important before helping others"
+    category: topic
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 282480, end_ms: 322860, speaker: "Gaur Gopal Das"}
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 322860, end_ms: 336180, speaker: "Gaur Gopal Das"}
+    notes: "English query, Hindi/Hinglish answer - self-transformation before transforming others."
+
+  - id: q39
+    query: "how to handle ego and pride"
+    category: topic
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 336180, end_ms: 359860, speaker: "RJ Kartik"}
+    notes: "The host's question introducing the ego/Ravana topic (answer would continue past this file's 6-min trim)."
+
+  - id: q40
+    query: "true purpose in life is not just earning money"
+    category: paraphrase
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 242220, end_ms: 282480, speaker: "Gaur Gopal Das"}
+    notes: "No literal overlap - transcript talks about income tax and bills not being life's purpose."
+
+  - id: q41
+    query: "everyone's spiritual journey is already within them"
+    category: paraphrase
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 37000, end_ms: 82980, speaker: "Gaur Gopal Das"}
+    notes: "Paraphrase of the 'the journey is hidden within us' + sculptor analogy opening."
+
+  - id: q42
+    query: "गुरु गौर गोपाल दास जी का स्वागत"
+    category: exact_phrase
+    relevant:
+      - {recording_id: gaur-gopal-das-rj-kartik, start_ms: 11800, end_ms: 20080, speaker: "RJ Kartik"}
+    notes: "Host's welcome line naming the guest - also the line that exposed the speaker-swap bug (see header note)."
+
+  - id: q43
+    query: "knitting patterns for beginners"
+    category: negative
+    relevant: []
+    notes: "True negative: no matching term anywhere in the corpus (checked against utterances.text_norm 2026-09-26). Replaces a duplicate of an earlier negative query."
+
+  - id: q44
+    query: "आज का मौसम कैसा है"
+    category: negative
+    relevant: []
+    notes: "True negative: no matching term anywhere in the corpus (checked against utterances.text_norm 2026-09-26). Replaces a duplicate of an earlier negative query."

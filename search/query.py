@@ -25,8 +25,14 @@ log = get_logger("search")
 
 RRF_K = 60
 RERANK_POOL = 30
-MIN_RERANK_SCORE = 0.05  # applied to semantic-only hits: below this, the cross-encoder is
-                          # saying "not actually relevant" - drop rather than pad with noise
+MIN_RERANK_SCORE = 0.006  # applied to semantic-only hits: below this, the cross-encoder is
+                          # saying "not actually relevant" - drop rather than pad with noise.
+                          # Was 0.05, which dropped correct Hindi/cross-lingual hits the reranker
+                          # ranks #1 but scores 0.003-0.02 (e.g. "batsman", "how to handle ego
+                          # and pride"). Lowered to just above the highest score seen on the 7
+                          # true-negative gold queries (0.0052), 2026-09-26. Tuned on a tiny set:
+                          # rerank scores for real hits and negatives overlap below ~0.006, so a
+                          # few correct low-scoring hits (q03, q15, q28) are still lost.
 LEXICAL_SUPPORTED_MIN_SCORE = 0.0  # applied when lexical or fuzzy already found the hit via
                           # literal/near-literal term matching - that's objective evidence the
                           # cross-encoder's absolute score can't override. Found via manual

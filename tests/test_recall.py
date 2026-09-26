@@ -1,11 +1,11 @@
 """Automated recall@k / MRR tests against the gold query set (Task 4).
 
-Thresholds below are set from a real baseline run (2026-09-26, 13 queries,
-elon-musk-build-the-future only - see eval/run_eval.py output), with
+Thresholds below are set from a real baseline run (2026-09-26, 44 queries
+across 4 of the 5 files - see eval/run_eval.py output), with
 margin below the observed numbers so the suite doesn't flake on minor
-future changes (embedding model version, chunking tweaks, etc.). They
-should be revisited once the full ~50-query, 5-file gold set exists
-(currently only 1/5 files has a query set - see data/gold/queries.yaml).
+future changes (embedding model version, chunking tweaks, etc.). hema-malini-podcast has no gold queries (unreliable
+diarization - see README). The set is small and was used to tune the rerank
+cutoff, so these are regression guards, not held-out estimates.
 
 Requires the local Postgres instance to be running and populated
 (the ingestion pipeline having been run for at least
@@ -17,10 +17,10 @@ import pytest
 
 from eval.run_eval import CONFIGS, evaluate_config, load_gold
 
-# Baseline measured 2026-09-26: hybrid_rerank recall@5=0.923, mrr=0.923.
+# Baseline measured 2026-09-26 (44 queries): hybrid_rerank recall@5=0.913, mrr=0.909.
 # Thresholds set with margin below that, not at the observed ceiling.
-MIN_HYBRID_RERANK_RECALL_AT_5 = 0.70
-MIN_HYBRID_RERANK_MRR = 0.70
+MIN_HYBRID_RERANK_RECALL_AT_5 = 0.80
+MIN_HYBRID_RERANK_MRR = 0.80
 MIN_NEGATIVE_CATEGORY_RECALL = 1.0  # no false positives on queries with no true answer - hard requirement, not a soft threshold
 
 
