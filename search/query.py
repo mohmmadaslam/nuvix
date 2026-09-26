@@ -11,6 +11,7 @@ all three retrieval legs.
 from __future__ import annotations
 
 import argparse
+import os
 import re
 
 import psycopg
@@ -24,7 +25,7 @@ from ingest.common import DATABASE_URL, get_logger
 log = get_logger("search")
 
 RRF_K = 60
-RERANK_POOL = 30
+RERANK_POOL = int(os.environ.get("NUVIX_RERANK_POOL", "30"))  # candidates the cross-encoder scores; lower = faster on CPU
 MIN_RERANK_SCORE = 0.006  # applied to semantic-only hits: below this, the cross-encoder is
                           # saying "not actually relevant" - drop rather than pad with noise.
                           # Was 0.05, which dropped correct Hindi/cross-lingual hits the reranker

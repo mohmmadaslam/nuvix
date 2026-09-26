@@ -25,3 +25,6 @@ data/videos/*.mp4
 # diarization, embeddings, etc.) - not committed, reproducible from
 # data/videos + data/manifest.yaml + ingest/ code.
 data/pipeline/
+
+# Generated Hugging Face Space bundle (includes a DB dump and audio copies)
+deploy/build/
