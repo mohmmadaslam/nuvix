@@ -131,6 +131,16 @@ Documented as they were found, not smoothed over:
   more severe case (a diarization flicker fragmenting one sentence into a 20ms orphan
   utterance) was caught via manual testing and fixed by merging degenerate short turns at
   the chunking stage.
+- **Diarization failed badly on one file.** `hema-malini-podcast`: 94%+ of the 17.9-minute
+  file was collapsed into a single speaker cluster (Hema Malini credited with only ~18
+  seconds total, first appearing at 16:53), despite content clearly containing both question
+  and first-person-answer turns throughout. Checked and ruled out a channel-separation cause
+  (source video's L/R stereo correlation is 0.795 — a normal mixed-down track, not separate
+  per-speaker mics); this is a genuine model failure on this file's audio, not a fixable
+  pipeline bug. Accepted as a documented limitation rather than chased further: speaker
+  labels for this recording are unreliable and it's excluded from
+  speaker-attribution-dependent gold queries/metrics, while remaining usable for
+  content/topic-only queries.
 - **The cross-encoder reranker is not reliably calibrated across topics.** Found via manual
   testing: a genuine top-ranked match (agreed on by all 3 retrieval methods) scored 0.006 on
   an absolute 0-1 scale, while an equivalent-style query on different content scored 0.166.
@@ -140,6 +150,13 @@ Documented as they were found, not smoothed over:
 - **The gold query set currently covers only 1 of 5 files** and lacks the cross-file/
   cross-lingual categories the architecture calls for — both blocked on the remaining 4
   files finishing ingestion, not a design gap.
+- **Forcing `language='hi'` transliterates English words into Devanagari script**, rather
+  than switching to Latin script for code-switched English content. Confirmed by inspecting
+  the actual transcript: e.g. "documentary" is rendered phonetically as "डॉक्यूमेंटरी", not
+  "documentary". This is a side effect of forced-language decoding, not a transcription
+  error — but it means literal-English-spelling gold queries won't lexically match these
+  passages, and likely inflates WER for the English-origin portions of code-switched speech.
+  Affects the 4 Hindi/Hinglish files; noted here for whoever writes their gold query sets.
 - **No WER measurement yet.** The architecture calls for hand-correcting ~2 minutes of gold
   transcript per file; this requires listening to the actual audio, which hasn't been done.
 - **A deliberate scope decision, not a limitation of the retrieval design:** the query

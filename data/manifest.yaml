@@ -75,7 +75,28 @@ recordings:
     duration_sec: 1072.3
     num_speakers: 2
     speakers: [Harshvardhan Pathak, Hema Malini]   # host name provided by project owner, 2026-09-26 (not publicly listed on channel)
-    notes: Bollywood-focused interview podcast; likely Hindi-English code-switched.
+    notes: >
+      Bollywood-focused interview podcast; Hindi-English code-switched (confirmed:
+      transcript is almost entirely Devanagari script, INCLUDING phonetic
+      transliteration of English words/phrases spoken mid-sentence, e.g. "documentary"
+      -> "डॉक्यूमेंटरी" - a side effect of forcing language='hi' in transcription,
+      not a transcription error per se, but worth noting for anyone writing
+      English-language gold queries against this file's literal text).
+
+      KNOWN ISSUE (measured 2026-09-26, accepted as a documented limitation rather
+      than fixed): diarization badly misattributed this file - Hema Malini is
+      credited with only ~18s of the 17:52 total (first appearing at 16:53), with
+      94%+ of the file collapsed into a single speaker cluster despite content
+      clearly containing both question and first-person answer turns throughout.
+      Ruled out a channel-separation cause (checked L/R stereo channel correlation
+      on the source video: 0.795, i.e. a normal mixed-down stereo track, not
+      separate per-speaker mics) - this is a genuine pyannote clustering failure on
+      this file's specific audio (possibly background music under the interview, or
+      similar vocal characteristics between the two speakers), not a fixable bug in
+      this pipeline. Speaker labels for this recording should be treated as
+      unreliable; do not use this file for speaker-attribution-dependent gold
+      queries or metrics. Content/topic-only queries against this file are
+      unaffected.
 
   - id: illuminati-hindi-explanation
     filename: "ILLUMINATI _ Detailed Hindi Explanation & Reality (Shocking).mp4"
