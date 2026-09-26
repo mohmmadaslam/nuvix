@@ -25,8 +25,17 @@ log = get_logger("search")
 
 RRF_K = 60
 RERANK_POOL = 30
-MIN_RERANK_SCORE = 0.05  # below this, the cross-encoder is saying "not actually relevant" -
-                          # drop rather than pad results up to top_k with noise
+MIN_RERANK_SCORE = 0.05  # applied to semantic-only hits: below this, the cross-encoder is
+                          # saying "not actually relevant" - drop rather than pad with noise
+LEXICAL_SUPPORTED_MIN_SCORE = 0.0  # applied when lexical or fuzzy already found the hit via
+                          # literal/near-literal term matching - that's objective evidence the
+                          # cross-encoder's absolute score can't override. Found via manual
+                          # testing: reranker scored genuine "Stanford" hits (agreed on by all
+                          # 3 retrieval legs) at 0.006-0.007, while an equivalent-style query
+                          # ("Tesla") scored 0.166 - the reranker isn't reliably calibrated
+                          # across topics, so an absolute cutoff shouldn't override a literal
+                          # term match. Kept at 0.0 rather than removed entirely as a floor
+                          # against a future degenerate-text edge case slipping through.
 _MODEL = None
 _RERANKER = None
 
@@ -160,7 +169,7 @@ def search(
                 SELECT u.id, r.title, r.id AS recording_id, s.display_name,
                        u.start_ms, u.text_raw,
                        ts_headline('simple', u.text_raw, websearch_to_tsquery('simple', %s),
-                                   'StartSel=**, StopSel=**, MaxWords=100, MinWords=20') AS snippet
+                                   'StartSel=**, StopSel=**, HighlightAll=true') AS snippet
                 FROM utterances u
                 JOIN recordings r ON u.recording_id = r.id
                 JOIN speakers s ON u.speaker_id = s.id
@@ -182,11 +191,17 @@ def search(
         scores = reranker.predict(pairs)
         order = sorted(range(len(candidates)), key=lambda i: scores[i], reverse=True)
         rerank_scores = {candidates[i]: round(float(scores[i]), 4) for i in range(len(candidates))}
+
+        def _clears_threshold(uid: int) -> bool:
+            has_literal_support = "lexical" in fused[uid]["hits"] or "fuzzy" in fused[uid]["hits"]
+            threshold = LEXICAL_SUPPORTED_MIN_SCORE if has_literal_support else min_rerank_score
+            return rerank_scores[uid] >= threshold
+
         # Drop below-threshold results instead of padding up to top_k with
-        # noise the cross-encoder itself is saying is irrelevant.
-        ranked_ids = [
-            candidates[i] for i in order if rerank_scores[candidates[i]] >= min_rerank_score
-        ][:top_k]
+        # noise the cross-encoder itself is saying is irrelevant - but don't
+        # let the reranker's absolute score override a literal term match
+        # lexical/fuzzy already found (see LEXICAL_SUPPORTED_MIN_SCORE above).
+        ranked_ids = [candidates[i] for i in order if _clears_threshold(candidates[i])][:top_k]
     else:
         ranked_ids = candidates[:top_k]
         rerank_scores = {}
