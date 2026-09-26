@@ -7,9 +7,10 @@ __pycache__/
 .venv/
 venv/
 
-# Large media - tracked via manifest, not committed raw yet (see licensing note in docs/ARCHITECTURE.md)
-data/videos/*.mp4
-data/audio/*.wav
+# Raw video/audio ARE committed (plain git, no LFS) - decided 2026-09-26.
+# Repo is private; source videos are standard-license (not CC) YouTube
+# uploads, so this is acceptable for a private repo but must never be
+# pushed to a public remote. See docs/ARCHITECTURE.md Section 2.
 
 # Env / secrets
 .env

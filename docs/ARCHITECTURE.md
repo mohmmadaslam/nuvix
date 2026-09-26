@@ -64,10 +64,13 @@ This is a stronger test of the hybrid design than an all-English set, because it
 - *Speaker count check:* one file's title ("ILLUMINATI: Detailed Hindi Explanation") reads like
   solo narration; confirmed by the person who selected it to be a genuine two-person
   conversation before inclusion.
-- *Licensing:* these are downloaded YouTube episodes, not confirmed CC-licensed clips. Source
-  URL and license fields in the manifest are TBD and must be resolved before any public
-  GitHub/GitLab push of the raw audio/video files — committing full copyrighted media to a
-  public repo is a separate risk from using it locally for development and evaluation.
+- *Licensing:* confirmed 2026-09-26 — all 6 source videos are standard-license YouTube uploads
+  (Y Combinator, BBC World Service, Hindi Rush, The Ranveer Show Clips, RJ Kartik, Raj Shamani
+  Highlights), none Creative Commons. **Decision:** the submission repo is kept **private**
+  with reviewer-only access, and raw video/audio is committed as plain git blobs (no LFS) on
+  that basis — this is not public redistribution. The repo must never be made public or pushed
+  to a public remote without re-evaluating this decision; see `data/manifest.yaml` for the
+  per-file source URLs and channel attribution.
 
 **Gold transcript slices:** hand-correct ~2 minutes per file (12 minutes total) for WER and
 speaker-attribution measurement. For files where an existing transcript/caption track is
@@ -218,6 +221,6 @@ README.md (results, success criteria, limitations)
   separately rather than as one blended number.
 - **File lengths exceed the spec's 8-10 min target** (10.4-19.8 min) — documented deviation,
   decided in favor of unedited full episodes (see Section 2).
-- **Licensing of source videos is unresolved** — must be settled before any public repo push
-  of raw media.
+- **Repo is private by design** — raw video/audio (standard-license YouTube, not CC) is
+  committed on that basis. Never push this repo, or these files, to a public remote.
 - **50 queries is a small eval set** — results reported with this caveat, not over-interpreted.

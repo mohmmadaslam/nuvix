@@ -9,16 +9,25 @@
 # trimmed, per project decision on 2026-09-26. This is called out
 # explicitly in the submission write-up's "limitations" section.
 #
-# NOTE (licensing): these are downloaded YouTube podcast episodes, not
-# confirmed CC-licensed clips. Source/license fields must be filled in
-# before any public GitHub push of the raw audio/video files.
+# NOTE (licensing): confirmed 2026-09-26 via source URLs below. All 6 are
+# from established branded YouTube channels (Y Combinator, BBC World
+# Service, Hindi Rush, The Ranveer Show Clips, RJ Kartik, Raj Shamani
+# Highlights) publishing under the platform's default "Standard YouTube
+# License" (all rights reserved) - none are Creative Commons.
+#
+# DECISION (2026-09-26): repo will be PRIVATE with reviewer-only access,
+# and raw video/audio files ARE committed (plain git, no LFS) since this
+# is not public redistribution. This repo must never be made public or
+# pushed to a public remote without re-evaluating this decision. See
+# docs/ARCHITECTURE.md Section 2.
 
 recordings:
   - id: bbc-social-media-bans
     filename: "Bans on social media and phones_ what's the evidence_ - What in the World podcast, BBC World Service.mp4"
     title: "Bans on social media and phones: what's the evidence? - What in the World podcast"
-    source_url: TBD
-    license: TBD
+    source_url: https://youtu.be/b4jTc1YpEgM
+    channel: BBC World Service
+    license: "Standard YouTube License (all rights reserved) - not CC"
     language: en
     duration_sec: 1188.6
     num_speakers: 2
@@ -28,8 +37,9 @@ recordings:
   - id: elon-musk-build-the-future
     filename: "Elon Musk _ How to Build the Future.mp4"
     title: "Elon Musk: How to Build the Future"
-    source_url: TBD
-    license: TBD
+    source_url: https://youtu.be/tnBQmEqBCY0
+    channel: Y Combinator
+    license: "Standard YouTube License (all rights reserved) - not CC"
     language: en
     duration_sec: 1172.9
     num_speakers: 2
@@ -39,8 +49,9 @@ recordings:
   - id: hema-malini-podcast
     filename: "Hema Malini On Dharmendra Ji, Highest Paid Actress, Sunny, Bobby Deol, Politics & Bollywood_ Podcast.mp4"
     title: "Hema Malini On Dharmendra Ji, Highest Paid Actress, Sunny, Bobby Deol, Politics & Bollywood"
-    source_url: TBD
-    license: TBD
+    source_url: https://youtu.be/VRzNXjrHXJk
+    channel: Hindi Rush
+    license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi           # Hindi/Hinglish - verify code-switching level during transcription
     duration_sec: 1072.3
     num_speakers: 2
@@ -50,8 +61,9 @@ recordings:
   - id: illuminati-hindi-explanation
     filename: "ILLUMINATI _ Detailed Hindi Explanation & Reality (Shocking).mp4"
     title: "ILLUMINATI: Detailed Hindi Explanation & Reality"
-    source_url: TBD
-    license: TBD
+    source_url: https://youtu.be/0A6TIiy5DCU
+    channel: "TRS Clips | The Ranveer Show Clips"
+    license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi
     duration_sec: 855.6
     num_speakers: 2        # confirmed two-person conversation (not solo narration) - 2026-09-26
@@ -61,8 +73,9 @@ recordings:
   - id: raj-shamani-vikas-diviyakirti
     filename: "The One Habit That Changes Everything _ Raj Shamani X Dr. Vikas Diviyakirti.mp4"
     title: "The One Habit That Changes Everything - Raj Shamani X Dr. Vikas Diviyakirti"
-    source_url: TBD
-    license: TBD
+    source_url: https://youtu.be/LhgEfBXWfak
+    channel: Raj Shamani Highlights
+    license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi
     duration_sec: 625.6
     num_speakers: 2
@@ -72,8 +85,9 @@ recordings:
   - id: gaur-gopal-das-rj-kartik
     filename: "जीवन में आपके सोचने का तरीक़ा बदल देगा गुरु GAUR GOPAL DAS जी का ये PODCAST _ RJ KARTIK STORY.mp4"
     title: "Gaur Gopal Das with RJ Kartik - PODCAST / STORY"
-    source_url: TBD
-    license: TBD
+    source_url: https://youtu.be/SSyc52SsdrM
+    channel: Rj Kartik
+    license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi
     duration_sec: 945.3
     num_speakers: 2
