@@ -7,10 +7,12 @@ __pycache__/
 .venv/
 venv/
 
-# Raw video/audio ARE committed (plain git, no LFS) - decided 2026-09-26.
-# Repo is private; source videos are standard-license (not CC) YouTube
-# uploads, so this is acceptable for a private repo but must never be
-# pushed to a public remote. See docs/ARCHITECTURE.md Section 2.
+# REVISED 2026-09-26: repo is going public, so raw source videos are
+# excluded entirely (not CC-licensed - see docs/ARCHITECTURE.md Section 2)
+# and were purged from git history via filter-branch. Never re-add
+# data/videos/*.mp4 to git. Extracted audio (data/audio/*.wav) is kept
+# and committed - that's the actual pipeline input, not the raw source.
+data/videos/*.mp4
 
 # Env / secrets
 .env
