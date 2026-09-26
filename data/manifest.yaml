@@ -1,0 +1,81 @@
+# Golden dataset manifest.
+# One entry per source recording. Fields marked TBD are filled in during
+# ingestion (diarization + manual verification) or need source info from
+# whoever downloaded the clip.
+#
+# NOTE (documented deviation from spec): the task asks for 8-10 minute
+# files. These source videos are the full original podcast episodes
+# (10.4-19.8 min each) and are being used at full length rather than
+# trimmed, per project decision on 2026-09-26. This is called out
+# explicitly in the submission write-up's "limitations" section.
+#
+# NOTE (licensing): these are downloaded YouTube podcast episodes, not
+# confirmed CC-licensed clips. Source/license fields must be filled in
+# before any public GitHub push of the raw audio/video files.
+
+recordings:
+  - id: bbc-social-media-bans
+    filename: "Bans on social media and phones_ what's the evidence_ - What in the World podcast, BBC World Service.mp4"
+    title: "Bans on social media and phones: what's the evidence? - What in the World podcast"
+    source_url: TBD
+    license: TBD
+    language: en
+    duration_sec: 1188.6
+    num_speakers: 2
+    speakers: TBD          # first-appearance order, e.g. [Host Name, Guest Name]
+    notes: BBC World Service podcast episode.
+
+  - id: elon-musk-build-the-future
+    filename: "Elon Musk _ How to Build the Future.mp4"
+    title: "Elon Musk: How to Build the Future"
+    source_url: TBD
+    license: TBD
+    language: en
+    duration_sec: 1172.9
+    num_speakers: 2
+    speakers: TBD
+    notes: Y Combinator-style interview format.
+
+  - id: hema-malini-podcast
+    filename: "Hema Malini On Dharmendra Ji, Highest Paid Actress, Sunny, Bobby Deol, Politics & Bollywood_ Podcast.mp4"
+    title: "Hema Malini On Dharmendra Ji, Highest Paid Actress, Sunny, Bobby Deol, Politics & Bollywood"
+    source_url: TBD
+    license: TBD
+    language: hi           # Hindi/Hinglish - verify code-switching level during transcription
+    duration_sec: 1072.3
+    num_speakers: 2
+    speakers: TBD
+    notes: Bollywood-focused interview podcast; likely Hindi-English code-switched.
+
+  - id: illuminati-hindi-explanation
+    filename: "ILLUMINATI _ Detailed Hindi Explanation & Reality (Shocking).mp4"
+    title: "ILLUMINATI: Detailed Hindi Explanation & Reality"
+    source_url: TBD
+    license: TBD
+    language: hi
+    duration_sec: 855.6
+    num_speakers: 2        # confirmed two-person conversation (not solo narration) - 2026-09-26
+    speakers: TBD
+    notes: Confirmed two speakers by user despite "explanation" framing in title.
+
+  - id: raj-shamani-vikas-diviyakirti
+    filename: "The One Habit That Changes Everything _ Raj Shamani X Dr. Vikas Diviyakirti.mp4"
+    title: "The One Habit That Changes Everything - Raj Shamani X Dr. Vikas Diviyakirti"
+    source_url: TBD
+    license: TBD
+    language: hi
+    duration_sec: 625.6
+    num_speakers: 2
+    speakers: TBD
+    notes: Raj Shamani interview podcast; likely Hindi-English code-switched.
+
+  - id: gaur-gopal-das-rj-kartik
+    filename: "जीवन में आपके सोचने का तरीक़ा बदल देगा गुरु GAUR GOPAL DAS जी का ये PODCAST _ RJ KARTIK STORY.mp4"
+    title: "Gaur Gopal Das with RJ Kartik - PODCAST / STORY"
+    source_url: TBD
+    license: TBD
+    language: hi
+    duration_sec: 945.3
+    num_speakers: 2
+    speakers: TBD
+    notes: RJ Kartik hosting Gaur Gopal Das; likely Hindi-English code-switched.
