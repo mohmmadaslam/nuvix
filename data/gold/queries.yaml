@@ -1,0 +1,170 @@
+# Gold query set for recall@k / MRR / nDCG evaluation (Task 4).
+#
+# STATUS: q01-q13 (elon-musk-build-the-future) validated against the
+# actual video by the project owner on 2026-09-26. Still to add: cross_file
+# and cross_lingual categories, plus q01-q13 equivalents for the other 4
+# recordings, once they finish ingesting.
+#
+# `relevant` is a list of (recording_id, start_ms, end_ms, speaker)
+# intervals - a search result counts as a hit if its timestamp falls
+# inside one of these windows (+/- a few seconds tolerance, applied by
+# the eval code, not here). Empty `relevant: []` = negative query,
+# expected to return nothing.
+#
+# TODO once the other 4 files are ingested:
+#   - cross_file_topic: a theme discussed in 2+ files
+#   - cross_lingual_semantic: an English query surfacing a Hindi-file
+#     segment (or vice versa) purely on meaning
+#   - re-check negative queries like q13 ("illuminati") still correctly
+#     return nothing from THIS file once the actual Illuminati file
+#     exists elsewhere in the corpus - a false hit here would be a real bug.
+# TODO once search/query.py's parser supports speaker:/file: filters:
+#   - add true speaker_filtered queries testing the filter syntax itself,
+#     not just "a query whose answer happens to have a known speaker".
+
+queries:
+  - id: q01
+    query: "Mars colony"
+    category: exact_phrase
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 580420
+        end_ms: 583340
+        speaker: "Sam Altman"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 597520
+        end_ms: 612940
+        speaker: "Elon Musk"
+    notes: "Direct question + answer about Mars colonization odds."
+
+  - id: q02
+    query: "Stanford"
+    category: exact_keyword
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 241000
+        end_ms: 251280
+        speaker: "Elon Musk"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 266720
+        end_ms: 278420
+        speaker: "Elon Musk"
+    notes: "Two separate mentions of Stanford (grad studies plan, then deciding against the PhD)."
+
+  - id: q03
+    query: "Stanfrd"
+    category: asr_damaged_proper_noun
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 241000
+        end_ms: 251280
+        speaker: "Elon Musk"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 266720
+        end_ms: 278420
+        speaker: "Elon Musk"
+    notes: "Deliberate misspelling of q02 - tests fuzzy/trigram matching, same expected answers."
+
+  - id: q04
+    query: "ultracapasitors"
+    category: asr_damaged_proper_noun
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 229220
+        end_ms: 240240
+        speaker: "Elon Musk"
+    notes: "Misspelled; transcript itself reads 'ultra capacitors' (two words) due to Whisper tokenization - tests whether fuzzy/semantic search bridges both the misspelling and the tokenization split."
+
+  - id: q05
+    query: "why civilizations forget how to build great things"
+    category: paraphrase
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 438700
+        end_ms: 449240
+        speaker: "Elon Musk"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 451560
+        end_ms: 462440
+        speaker: "Elon Musk"
+    notes: "No literal overlap with 'civilizations forget' - transcript discusses ancient Egypt/pyramids and Rome/aqueducts/hieroglyphics as concrete examples. Pure semantic test."
+
+  - id: q06
+    query: "combining human minds with AI"
+    category: paraphrase
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 837010
+        end_ms: 872250
+        speaker: "Elon Musk"
+    notes: "Transcript says 'merge with AI' / 'AI human symbiote' - tests paraphrase robustness, not an exact phrase match."
+
+  - id: q07
+    query: "how do you handle fear when making big decisions"
+    category: paraphrase
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 479400
+        end_ms: 495900
+        speaker: "Sam Altman"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 496860
+        end_ms: 534840
+        speaker: "Elon Musk"
+    notes: "Question + answer pair about fearlessness/decision-making under fear."
+
+  - id: q08
+    query: "splitting time between SpaceX and Tesla"
+    category: topic
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 952690
+        end_ms: 962390
+        speaker: "Sam Altman"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 962810
+        end_ms: 987230
+        speaker: "Elon Musk"
+    notes: "The first interval is the utterance that was a chunking-fix case (merged 'We're' fragment + 'close to 40 people now...' - see git history). Also checks speaker-attribution: the question is Sam Altman, the answer is Elon Musk."
+
+  - id: q09
+    query: "average production line speed"
+    category: topic
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 1115950
+        end_ms: 1134050
+        speaker: "Elon Musk"
+      - recording_id: elon-musk-build-the-future
+        start_ms: 1143760
+        end_ms: 1171660
+        speaker: "Elon Musk"
+    notes: "Transcript says 'speed on the line', not 'production line speed' - light paraphrase + exact-topic mix."
+
+  - id: q10
+    query: "OpenAI's sense of urgency and mission"
+    category: topic
+    relevant:
+      - recording_id: elon-musk-build-the-future
+        start_ms: 917330
+        end_ms: 929270
+        speaker: "Elon Musk"
+    notes: "Direct topical match."
+
+  - id: q11
+    query: "chocolate cake recipe"
+    category: negative
+    relevant: []
+    notes: "No relevant content in this file - nothing food/cooking-related is discussed."
+
+  - id: q12
+    query: "weather forecast for tomorrow"
+    category: negative
+    relevant: []
+    notes: "No relevant content - generic unrelated query."
+
+  - id: q13
+    query: "illuminati conspiracy theory"
+    category: negative
+    relevant: []
+    notes: "No relevant content in THIS file. Important re-check once the corpus includes illuminati-hindi-explanation: this query must keep returning nothing from elon-musk-build-the-future specifically, even though the corpus overall will have a real answer elsewhere - tests that retrieval doesn't get confused across files."
