@@ -3,11 +3,31 @@
 # ingestion (diarization + manual verification) or need source info from
 # whoever downloaded the clip.
 #
-# NOTE (documented deviation from spec): the task asks for 8-10 minute
-# files. These source videos are the full original podcast episodes
-# (10.4-19.8 min each) and are being used at full length rather than
-# trimmed, per project decision on 2026-09-26. This is called out
-# explicitly in the submission write-up's "limitations" section.
+# NOTE (documented deviation from spec, REVISED 2026-09-26): the task asks
+# for 8-10 minute files. Original decision (earlier 2026-09-26) was to use
+# full-length original episodes (10.4-19.8 min) rather than trim. That
+# decision held for elon-musk-build-the-future (19.5 min) and
+# hema-malini-podcast (17.9 min, already mid-transcription when this
+# revision happened - left running at full length rather than restarting
+# and losing ~45 min of already-completed compute).
+#
+# For the remaining 3 recordings (illuminati-hindi-explanation,
+# raj-shamani-vikas-diviyakirti, gaur-gopal-das-rj-kartik), NOT YET
+# INGESTED at the time of this revision, trimmed to their first 6 minutes
+# (00:00-06:00 of the original audio) instead - a time-constrained
+# processing decision given how slow CPU-only large-v3 transcription is
+# proving on this dev machine (see docs/ARCHITECTURE.md Section 8 for the
+# production-hardware discussion this motivated). Each trimmed file's
+# ORIGINAL full-length audio remains untouched at
+# data/audio/<id>.wav (untrimmed) - the manifest's audio_path for these 3
+# now points at data/audio/<id>.6min.wav instead. Source videos in
+# data/videos/ are unaffected either way (full length, never trimmed).
+#
+# Net result: the golden dataset now has inconsistent per-file lengths
+# (2 files at their full original 17.9-19.5 min length, 3 files trimmed to
+# a fixed 6 min) - both deviations from the spec's 8-10 min target, in
+# opposite directions, called out explicitly in the submission write-up's
+# "limitations" section.
 #
 # NOTE (licensing): confirmed 2026-09-26 via source URLs below. All 6 are
 # from established branded YouTube channels (Y Combinator, BBC World
@@ -59,39 +79,39 @@ recordings:
 
   - id: illuminati-hindi-explanation
     filename: "ILLUMINATI _ Detailed Hindi Explanation & Reality (Shocking).mp4"
-    audio_path: data/audio/illuminati-hindi-explanation.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
+    audio_path: data/audio/illuminati-hindi-explanation.6min.wav   # TRIMMED to first 6 min (00:00-06:00) 2026-09-26, time-constrained processing decision - see note below. Full 14.3-min audio still at data/audio/illuminati-hindi-explanation.wav, untouched.
     title: "ILLUMINATI: Detailed Hindi Explanation & Reality"
     source_url: https://youtu.be/0A6TIiy5DCU
     channel: "TRS Clips | The Ranveer Show Clips"
     license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi
-    duration_sec: 855.6
+    duration_sec: 360.0   # trimmed from original 855.6s (14.3 min) - see audio_path note
     num_speakers: 2        # confirmed two-person conversation (not solo narration) - 2026-09-26
     speakers: [Ranveer Allahbadia, Ankit Awasthi]   # confirmed via video description: The Ranveer Show ep. 442, guest is geopolitics commentator Ankit Awasthi
     notes: Confirmed two speakers by user despite "explanation" framing in title. Full episode covers geopolitics/current affairs (Illuminati is one segment within it).
 
   - id: raj-shamani-vikas-diviyakirti
     filename: "The One Habit That Changes Everything _ Raj Shamani X Dr. Vikas Diviyakirti.mp4"
-    audio_path: data/audio/raj-shamani-vikas-diviyakirti.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
+    audio_path: data/audio/raj-shamani-vikas-diviyakirti.6min.wav   # TRIMMED to first 6 min (00:00-06:00) 2026-09-26, time-constrained processing decision - see note below. Full 10.4-min audio still at data/audio/raj-shamani-vikas-diviyakirti.wav, untouched.
     title: "The One Habit That Changes Everything - Raj Shamani X Dr. Vikas Diviyakirti"
     source_url: https://youtu.be/LhgEfBXWfak
     channel: Raj Shamani Highlights
     license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi
-    duration_sec: 625.6
+    duration_sec: 360.0   # trimmed from original 625.6s (10.4 min) - see audio_path note
     num_speakers: 2
     speakers: [Raj Shamani, Dr. Vikas Diviyakirti]   # confirmed via title
     notes: Raj Shamani interview podcast; likely Hindi-English code-switched.
 
   - id: gaur-gopal-das-rj-kartik
     filename: "जीवन में आपके सोचने का तरीक़ा बदल देगा गुरु GAUR GOPAL DAS जी का ये PODCAST _ RJ KARTIK STORY.mp4"
-    audio_path: data/audio/gaur-gopal-das-rj-kartik.wav   # 16kHz mono WAV, extracted via ffmpeg 2026-09-26
+    audio_path: data/audio/gaur-gopal-das-rj-kartik.6min.wav   # TRIMMED to first 6 min (00:00-06:00) 2026-09-26, time-constrained processing decision - see note below. Full 15.75-min audio still at data/audio/gaur-gopal-das-rj-kartik.wav, untouched.
     title: "Gaur Gopal Das with RJ Kartik - PODCAST / STORY"
     source_url: https://youtu.be/SSyc52SsdrM
     channel: Rj Kartik
     license: "Standard YouTube License (all rights reserved) - not CC"
     language: hi
-    duration_sec: 945.3
+    duration_sec: 360.0   # trimmed from original 945.3s (15.75 min) - see audio_path note
     num_speakers: 2
     speakers: [RJ Kartik, Gaur Gopal Das]   # confirmed via title
     notes: RJ Kartik hosting Gaur Gopal Das; likely Hindi-English code-switched.
