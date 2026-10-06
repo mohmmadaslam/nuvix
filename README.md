@@ -3,6 +3,9 @@
 Hybrid search over two-speaker audio transcripts.
 (Multimodal AI: Audio search).
 
+<img width="1892" height="1656" alt="image" src="https://github.com/user-attachments/assets/5156313d-649d-4843-bb5b-fd4b60b7ff43" />
+
+
 **Status: all 5 files ingested and evaluated.** Sections marked `[TODO]` are measurements not
 yet performed (WER, speaker-attribution accuracy, latency); everything else reflects the
 actual current state of the system, not a plan.
