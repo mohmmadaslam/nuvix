@@ -12,18 +12,16 @@ was acceptable. Several of the most important fixes in this project came directl
 project owner manually testing the running system and reporting results back to the agent,
 not from the agent's own automated checks.
 
-## 1. Problem selection and architecture design
+## 1. Product scoping and architecture design
 
-The agent was given the problem statement (summarized in [PRODUCT.md](PRODUCT.md)) and asked to design a solution
-architecture before writing any code (explicit instruction: "no code required at first
-step"). The agent read all 3 problem statements and, after being asked to choose one,
-selected **Problem Statement 1** (hybrid search over two-speaker audio transcripts), then
-produced a full architecture document covering: golden dataset construction, ingestion
+The agent was given a product brief (summarized in [PRODUCT.md](PRODUCT.md)) and asked to design a
+solution architecture before writing any code (explicit instruction: "no code required at first
+step"). The agent read the brief and produced a full architecture document covering: golden dataset construction, ingestion
 pipeline design (ASR, diarization, chunking, embeddings), storage schema, hybrid query
 pipeline (lexical + semantic fusion + reranking), and an evaluation plan (recall@k, MRR,
 nDCG, ablation study).
 
-**Project owner's role:** approved the problem-statement choice, then asked follow-up
+**Project owner's role:** approved the chosen direction, then asked follow-up
 questions that changed the design before any implementation started:
 - *"why can't we have some good model which can handle hindi video too?"* — pushed back on
   an initial English-only embedding model recommendation. The agent corrected course,
@@ -38,14 +36,14 @@ questions that changed the design before any implementation started:
 The project owner supplied 6 downloaded video files and, later, their original YouTube URLs.
 The agent:
 - Moved files into `data/videos/`, extracted audio via `ffmpeg`.
-- Used `ffprobe` to check each file's duration and found none matched the task's 8-10 minute
+- Used `ffprobe` to check each file's duration and found none matched the 8-10 minute target
   target (all were 10.4-19.8 min) — flagged this rather than silently proceeding.
 - Matched the 6 YouTube URLs to files via oEmbed metadata, and cross-checked license status
   via the Hugging Face-style approach of querying actual metadata rather than assuming —
   confirming all 6 sources were standard-license YouTube uploads, not Creative Commons.
 - Flagged that one file's description named 5+ distinct voices (a produced multi-voice BBC
   segment), which the project owner confirmed should be **dropped** rather than kept or
-  swapped, leaving a 5-file dataset (within the task's 5-6 file range).
+  swapped, leaving a 5-file dataset (within the target 5-6 file range).
 - Resolved speaker names per file via web search and video descriptions; one speaker's name
   (Hindi Rush's host) had no public source, so the project owner supplied it directly.
 
@@ -55,9 +53,9 @@ The agent:
   media committed) and the project owner chose the private-repo route, explicitly accepting
   that this repo must never be made public.
 - **Git LFS vs. plain git** for the ~335MB of video files — project owner chose plain git.
-- **Keep full-length files vs. trim to spec** — project owner initially chose to keep full
+- **Keep full-length files vs. trim to target** — project owner initially chose to keep full
   original episode lengths rather than trim to 8-10 minutes, a documented deviation from the
-  task spec.
+  target.
 - **Multilingual mix**: the final dataset (1 English, 4 Hindi/Hinglish code-switched) was a
   deliberate choice enabling a cross-lingual semantic-search test case, not an accident of
   which files happened to be available.
@@ -272,11 +270,11 @@ record shows that goal shaping decisions at every stage:
 - **Tested the system by hand.** Ran real queries and reported the results back, which
   surfaced the three retrieval bugs the agent's own smoke tests missed (section 6).
 - **Owned the judgment calls** the agent could not make: licensing and repo visibility,
-  dataset length versus spec, infrastructure, and which files to drop (sections 2, 3, 8).
-- **Checked that the agent knew the task.** Asked directly whether the agent actually knew
-  the problem statement. It knew it only second-hand through the README and architecture
-  doc, so it read the PDF and confirmed the dataset-length deviation against the 8-10 minute
-  requirement before going on.
+  dataset length versus target, infrastructure, and which files to drop (sections 2, 3, 8).
+- **Checked the agent's grounding.** Asked directly whether the agent actually knew the
+  product requirements. It knew them only second-hand through the README and architecture
+  doc, so it re-read the source brief and confirmed the dataset-length deviation against the
+  8-10 minute target before going on.
 - **Kept the agent accountable when it stalled.** When a diagnostic was killed repeatedly,
   Aslam kept asking for status instead of letting the work drift, and the agent's answers
   during that window were not always useful. It found the cause was its own

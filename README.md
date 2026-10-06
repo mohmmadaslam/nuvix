@@ -84,7 +84,7 @@ Full sourcing, licensing, and per-decision rationale: [data/manifest.yaml](data/
 
 A 6th recording (a BBC World Service episode) was dropped from the original 6-file set — its
 description named 5+ distinct voices (a produced multi-voice segment), which didn't satisfy
-the task's two-speaker requirement. 5 files is within the task's stated 5-6 file range.
+the two-speaker requirement. 5 files is within the target 5-6 file range.
 
 ## Success criteria
 
@@ -174,7 +174,7 @@ these are single-user figures, not load-test results.
 
 Documented as they were found, not smoothed over:
 
-- **File lengths deviate from the task's 8-10 minute target in both directions.** 2 files
+- **File lengths deviate from the 8-10 minute target in both directions.** 2 files
   kept at their full original length (17.9-19.5 min — a prior decision, made before
   processing-time constraints became clear); 3 files trimmed to a fixed 6 minutes (a later,
   time-constrained decision to keep CPU-only local transcription tractable on the dev
@@ -182,7 +182,7 @@ Documented as they were found, not smoothed over:
 - **CPU-only transcription is slow and doesn't reflect production hardware.** `large-v3` on
   a fanless Apple M4 laptop ran below realtime, with one 17.9-minute file taking over an
   hour. In production this would run on GPU infrastructure or a hosted ASR API (explicitly
-  permitted by the task) — see docs/ARCHITECTURE.md Section 8.
+  a supported option) — see docs/ARCHITECTURE.md Section 8.
 - **Diarization struggles with fast turn-taking**, a known limitation of the underlying
   model, not this pipeline's chunking logic. Measured (not assumed): 5 of 3092 words (0.16%)
   in the Elon Musk file were misattributed across a rapid interjection boundary. A related,
@@ -215,7 +215,7 @@ Documented as they were found, not smoothed over:
   0.006 cutoff sits just above the highest true-negative score seen (0.0052); three correct
   hits (q03, q15, q28) score below it and are still lost. Fixing this properly needs a
   calibrated reranker score or a larger negative set, not a different threshold.
-- **Dataset lengths do not match the 8-10 minute spec** (see the first limitation).
+- **Dataset lengths do not match the 8-10 minute target** (see the first limitation).
 - **Forcing `language='hi'` transliterates English words into Devanagari script**, rather
   than switching to Latin script for code-switched English content. Confirmed by inspecting
   the actual transcript: e.g. "documentary" is rendered phonetically as "डॉक्यूमेंटरी", not

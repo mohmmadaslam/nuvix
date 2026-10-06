@@ -1,8 +1,7 @@
 # NUVIX architecture: hybrid search over two-speaker audio transcripts
 
-Problem statement 1 (Multimodal AI: Audio search): effective hybrid (keyword + semantic)
-retrieval across two-speaker audio recordings, at file/timestamp/speaker granularity, evaluated
-with recall@k against a labeled query set.
+NUVIX: hybrid (keyword + semantic) retrieval across two-speaker audio recordings, at
+file/timestamp/speaker granularity, evaluated with recall@k against a labeled query set.
 
 This document is the design spec: what we're building and why. It is also the spec handed to
 the coding agent during implementation (see `docs/AGENT_LOG.md`, added once implementation
@@ -57,8 +56,8 @@ This is a stronger test of the hybrid design than an all-English set, because it
 - A genuinely interesting eval category: an English-language query retrieving a relevant
   segment from a Hindi file based on meaning alone (lexical search cannot do this at all).
 
-**Documented deviations from the task spec, decided explicitly rather than discovered late:**
-- *Length:* the spec asks for 8-10 minute files. These are the full original episodes
+**Documented deviations from the target spec, decided explicitly rather than discovered late:**
+- *Length:* the target is 8-10 minute files. These are the full original episodes
   (10.4-19.8 min), used at full length rather than trimmed. Decision made 2026-09-26 in favor
   of preserving complete, unedited conversations over spec-exact trimming.
 - *Speaker count check:* one file's title ("ILLUMINATI: Detailed Hindi Explanation") reads like
@@ -66,7 +65,7 @@ This is a stronger test of the hybrid design than an all-English set, because it
   conversation before inclusion.
 - *Licensing:* confirmed 2026-09-26 — all 6 source videos are standard-license YouTube uploads
   (Y Combinator, BBC World Service, Hindi Rush, The Ranveer Show Clips, RJ Kartik, Raj Shamani
-  Highlights), none Creative Commons. **Decision:** the submission repo is kept **private**
+  Highlights), none Creative Commons. **Decision:** the repo was kept **private** while the raw media was in history
   with reviewer-only access, and raw video/audio is committed as plain git blobs (no LFS) on
   that basis — this is not public redistribution. The repo must never be made public or pushed
   to a public remote without re-evaluating this decision; see `data/manifest.yaml` for the
@@ -225,12 +224,12 @@ README.md (results, success criteria, limitations)
 - **Code-switched Hindi/English ASR** is inherently harder than monolingual transcription;
   WER is expected to run higher on the 4 Hindi files than the 1 English file, reported
   separately rather than as one blended number.
-- **File lengths exceed the spec's 8-10 min target** (10.4-19.8 min) — documented deviation,
+- **File lengths exceed the 8-10 min target** (10.4-19.8 min) — documented deviation,
   decided in favor of unedited full episodes (see Section 2).
 - **Repo is private by design** — raw video/audio (standard-license YouTube, not CC) is
   committed on that basis. Never push this repo, or these files, to a public remote.
 - **Dataset is 5 files, not 6** — one (BBC "What in the World") was dropped for having 5+
-  distinct voices rather than two (see Section 2); 5 is within the task's stated 5-6 range.
+  distinct voices rather than two (see Section 2); 5 is within the target 5-6 range.
 - **Postgres runs natively via Homebrew, on version 17 not 16** — pgvector's Homebrew bottle
   only supports 17/18; no functional impact (see Section 4).
 - **50 queries is a small eval set** — results reported with this caveat, not over-interpreted.
