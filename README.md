@@ -1,6 +1,6 @@
 # NUVIX — Hybrid Intelligence for Audio
 
-Hybrid search over two-speaker audio transcripts. Built as a solution to Problem Statement 1
+Hybrid search over two-speaker audio transcripts.
 (Multimodal AI: Audio search).
 
 **Status: all 5 files ingested and evaluated.** Sections marked `[TODO]` are measurements not
