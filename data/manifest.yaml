@@ -3,8 +3,8 @@
 # ingestion (diarization + manual verification) or need source info from
 # whoever downloaded the clip.
 #
-# NOTE (documented deviation from spec, REVISED 2026-09-26): the task asks
-# for 8-10 minute files. Original decision (earlier 2026-09-26) was to use
+# NOTE (documented deviation from target, REVISED 2026-09-26): the target is
+# 8-10 minute files. Original decision (earlier 2026-09-26) was to use
 # full-length original episodes (10.4-19.8 min) rather than trim. That
 # decision held for elon-musk-build-the-future (19.5 min) and
 # hema-malini-podcast (17.9 min, already mid-transcription when this
@@ -25,9 +25,8 @@
 #
 # Net result: the golden dataset now has inconsistent per-file lengths
 # (2 files at their full original 17.9-19.5 min length, 3 files trimmed to
-# a fixed 6 min) - both deviations from the spec's 8-10 min target, in
-# opposite directions, called out explicitly in the submission write-up's
-# "limitations" section.
+# a fixed 6 min) - both deviations from the 8-10 min target, in
+# opposite directions, called out explicitly in the README's "Limitations" section.
 #
 # NOTE (licensing): confirmed 2026-09-26 via source URLs below. All 6 are
 # from established branded YouTube channels (Y Combinator, BBC World
@@ -45,9 +44,9 @@
 # phones... BBC World Service"). Its description named 5+ distinct voices
 # (unnamed host, journalist Hayley Clarke, correspondent Hannah Ritchie,
 # two professors, student vox-pops) - a produced multi-voice segment, not
-# a two-person conversation, so it did not satisfy the task's two-speaker
+# a two-person conversation, so it did not satisfy the two-speaker
 # requirement. Removed rather than swapped in favor of a replacement;
-# dataset is 5 files, which is within the task's 5-6 file range. Source
+# dataset is 5 files, which is within the target 5-6 file range. Source
 # video file removed from data/videos/ and from git.
 
 recordings:

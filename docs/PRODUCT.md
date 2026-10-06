@@ -25,6 +25,48 @@ between English and Hindi mid-sentence, break most single-language tools.
 - **Researchers** comparing what each participant said across many interviews.
 - **Individuals** searching their own meeting notes and voice recordings.
 
+## Alternatives and how NUVIX differs
+
+The market already has tools close to parts of this. They are useful to know about, and they
+show where NUVIX fits.
+
+**Meeting and personal recorders**
+- **Otter.ai, Fireflies.ai:** searchable, speaker-labelled meeting transcripts that jump to the
+  timestamp. These are the nearest to NUVIX's search-and-play flow.
+- **Apple Voice Memos, Google Recorder:** on-device transcripts you can search on your phone.
+
+**Sales and call intelligence** (closest to the customer-experience use case)
+- **Gong, Chorus (ZoomInfo), Clari:** search calls by topic or competitor mention, and filter by
+  who spoke, such as rep versus customer.
+- **Observe.AI, Balto, CallMiner:** contact-centre compliance and quality checks.
+
+**Legal**
+- **Everlaw, Relativity:** searchable transcripts linked to the source audio or video, used in
+  discovery.
+
+**Research**
+- **Dovetail, Condens:** tag and search interview transcripts across a study, close to the
+  research use case.
+
+**Transcription services**
+- **Rev, Sonix, Trint, Descript:** transcription with editing and search. Descript lets you edit
+  audio by editing the transcript.
+
+**Open source, closest to our stack**
+- **WhisperX:** Whisper with word-level timestamps and speaker diarization. It is the same family
+  of tools NUVIX uses, but it is a transcription pipeline, not a search product.
+
+**Where NUVIX is different**
+- **Local and private:** the audio and index never leave your machine. Most products above are
+  cloud services, which matters for legal and healthcare use.
+- **Hindi and English together:** most tools are strongest in English, so multilingual search is
+  less common.
+- **Measured retrieval:** NUVIX publishes recall, MRR and an ablation. Commercial tools rarely
+  publish accuracy numbers.
+
+The incumbents are ahead on polish, calendar and CRM integrations, speaker renaming and mobile
+apps. NUVIX competes on privacy and multilingual search, not on features.
+
 ## What it does
 
 - **Hybrid search:** exact keywords, fuzzy matching for misspellings, and semantic matching
