@@ -14,7 +14,7 @@ not from the agent's own automated checks.
 
 ## 1. Problem selection and architecture design
 
-The agent was given the problem-statement PDF (docs/problem-statement.pdf) and asked to design a solution
+The agent was given the problem statement (summarized in [PRODUCT.md](PRODUCT.md)) and asked to design a solution
 architecture before writing any code (explicit instruction: "no code required at first
 step"). The agent read all 3 problem statements and, after being asked to choose one,
 selected **Problem Statement 1** (hybrid search over two-speaker audio transcripts), then
