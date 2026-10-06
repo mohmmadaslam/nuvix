@@ -1,7 +1,7 @@
 # NUVIX — Hybrid Intelligence for Audio
 
-Hybrid search over two-speaker audio transcripts. Built for the G2 AI Hiring Hackathon —
-Problem Statement 1 (Multimodal AI: Audio search).
+Hybrid search over two-speaker audio transcripts. Built as a solution to Problem Statement 1
+(Multimodal AI: Audio search).
 
 **Status: all 5 files ingested and evaluated.** Sections marked `[TODO]` are measurements not
 yet performed (WER, speaker-attribution accuracy, latency); everything else reflects the
@@ -17,6 +17,28 @@ recordings. Given a text query, it returns the containing file, timestamp, and s
 matching moments — combining exact/fuzzy lexical matching with semantic embedding search,
 fused and reranked, entirely on local infrastructure (Postgres + pgvector, open-weight
 models, no external API calls at query time).
+
+## Use cases
+
+Anywhere people need to find *what was said, by whom, and when* in recorded conversations
+without listening to all of them:
+
+- **Podcast and media editing:** find the clip where a guest discussed a topic, then play it
+  from that moment.
+- **Legal review (depositions, interviews):** find every mention of a date, amount or claim,
+  with the speaker identified, to cite exact timestamps. Runs locally, so sensitive recordings
+  never leave the machine.
+- **Customer-call quality and compliance:** find calls where a customer raised a complaint,
+  however it was phrased, using semantic search rather than exact keywords.
+- **Research interviews:** find what each participant said about a theme across all sessions,
+  grouped by recording.
+- **Study and training:** jump straight to where a lecturer explained a concept, instead of
+  replaying a full lecture.
+- **Personal meeting notes:** answer "what did we decide about the budget?" from last month's
+  meetings in seconds.
+
+The Hindi/English mix in the corpus reflects a common real case: many teams work across both
+languages in the same recordings, and most single-language tools handle that poorly.
 
 ## Engineering design (summary — see docs/ARCHITECTURE.md for full detail and rationale)
 

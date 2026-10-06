@@ -1,6 +1,6 @@
 # NUVIX architecture: hybrid search over two-speaker audio transcripts
 
-Problem statement 1 from the G2 AI Hiring Hackathon: effective hybrid (keyword + semantic)
+Problem statement 1 (Multimodal AI: Audio search): effective hybrid (keyword + semantic)
 retrieval across two-speaker audio recordings, at file/timestamp/speaker granularity, evaluated
 with recall@k against a labeled query set.
 

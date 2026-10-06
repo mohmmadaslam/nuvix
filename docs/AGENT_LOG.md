@@ -1,7 +1,7 @@
 # Coding agent collaboration disclosure — NUVIX
 
 This project was built in collaboration with **Claude** (Anthropic's coding agent, running
-as Claude Code), per the hackathon's disclosure requirement. This document summarizes how
+as Claude Code), per the project's disclosure requirement. This document summarizes how
 the agent was directed and the substantive decisions made along the way — both by the
 project owner and by the agent — rather than reproducing the full conversation transcript.
 
@@ -14,7 +14,7 @@ not from the agent's own automated checks.
 
 ## 1. Problem selection and architecture design
 
-The agent was given the hackathon's problem-statement PDF and asked to design a solution
+The agent was given the problem-statement PDF (docs/problem-statement.pdf) and asked to design a solution
 architecture before writing any code (explicit instruction: "no code required at first
 step"). The agent read all 3 problem statements and, after being asked to choose one,
 selected **Problem Statement 1** (hybrid search over two-speaker audio transcripts), then
